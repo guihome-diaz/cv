@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de CV - QIN Sisi</title>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
+
+    <!-- js-yaml pour parser YAML -->
+    <script src="https://unpkg.com/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+    <!-- html2canvas + jspdf pour export PDF -->
+    <script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --text: #1a1a1a;
+            --muted: #555555;
+            --light: #95a5a6;
+            --bg: #f5f5f5;
+            --paper: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* ===== LAYOUT ===== */
+        .app {
+            min-height: 100vh;
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .toolbar h1 {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c0392b;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .main {
+            padding-top: 76px;
+            padding-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* ===== PAPER (A4 simulation) ===== */
+        .paper {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--paper);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 15mm;
+            position: relative;
+        }
+
+        @media screen and (max-width: 230mm) {
+            .paper {
+                width: 100%;
+                min-height: auto;
+                padding: 6mm;
+            }
+        }
+
+        @media print {
+            .toolbar { display: none !important; }
+            .main { padding-top: 0; }
+            .paper {
+                box-shadow: none;
+                width: 100%;
+                padding: 10mm;
+            }
+            .upload-zone { display: none; }
+        }
+
+        /* ===== CV STYLES ===== */
+        .cv-header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .cv-name {
+            font-size: 20pt;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+            line-height: 1.2;
+        }
+
+        .cv-contact {
+            margin-top: 6px;
+            font-size: 9.5pt;
+            color: var(--muted);
+        }
+
+        .cv-contact a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .cv-section {
+            margin-bottom: 14px;
+        }
+
+        .cv-section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8pt;
+            color: var(--primary);
+            border-bottom: 1px solid var(--light);
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+
+        .job {
+            margin-bottom: 12px;
+        }
+
+        .job:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .job-title-line {
+            font-weight: 600;
+            font-size: 10.5pt;
+        }
+
+        .job-company {
+            font-weight: 400;
+            color: var(--secondary);
+        }
+
+        .job-date {
+            font-size: 9.5pt;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .job-subtitle {
+            font-style: italic;
+            color: var(--muted);
+            font-size: 9.5pt;
+        }
+
+        .job-location {
+            font-size: 9pt;
+            color: var(--muted);
+            margin-top: 1px;
+        }
+
+        .tasks-list {
+            margin-top: 5px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .task-item {
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 2px;
+            font-size: 10pt;
+            line-height: 1.45;
+        }
+
+        .task-item::before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .task-sublist {
+            margin-top: 3px;
+            margin-bottom: 4px;
+            padding-left: 16px;
+            list-style: none;
+        }
+
+        .task-sublist li {
+            position: relative;
+            padding-left: 10px;
+            font-size: 9.5pt;
+            color: var(--text);
+            margin-bottom: 1px;
+        }
+
+        .task-sublist li::before {
+            content: "-";
+            position: absolute;
+            left: 0;
+            color: var(--muted);
+        }
+
+        .education-item {
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .education-content {
+            flex: 1;
+        }
+
+        .edu-degree {
+            font-weight: 600;
+        }
+
+        .edu-eqf {
+            color: var(--muted);
+            font-size: 9pt;
+        }
+
+        .edu-field {
+            color: var(--text);
+        }
+
+        .edu-school {
+            color: var(--muted);
+            font-size: 9.5pt;
+        }
+
+        .edu-year {
+            color: var(--muted);
+            font-size: 9.5pt;
+            white-space: nowrap;
+            padding-left: 12px;
+        }
+
+        .lang-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .lang-table td {
+            padding: 2px 0;
+            font-size: 10pt;
+        }
+
+        .lang-table td:first-child {
+            width: 25%;
+            font-weight: 500;
+        }
+
+        .lang-table td:nth-child(2) {
+            width: 25%;
+            color: var(--muted);
+            font-size: 9.5pt;
+        }
+
+        .lang-table td:last-child {
+            color: var(--text);
+            font-size: 9.5pt;
+        }
+
+        /* ===== UPLOAD ZONE ===== */
+        .upload-zone {
+            position: fixed;
+            top: 76px;
+            right: 20px;
+            width: 280px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 50;
+        }
+
+        .upload-zone h3 {
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #f8f9fa;
+        }
+
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: #e8f4f8;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* ===== NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 13px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ===== LOADING ===== */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="app">
+    <!-- Barre d'outils -->
+    <header class="toolbar">
+        <h1>📝 Générateur de CV</h1>
+        <div class="toolbar-actions">
+            <button class="btn btn-secondary" @click="toggleUpload">
+                📂 Charger YAML
+            </button>
+            <button class="btn btn-primary" @click="exportPDF" :disabled="loading">
+                <span v-if="loading" class="spinner"></span>
+                <span v-else>⬇ PDF</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Zone d'upload (toggleable) -->
+    <div v-if="showUpload" class="upload-zone">
+        <h3>Importer un CV YAML</h3>
+        <div
+                class="upload-area"
+                @click="$refs.fileInput.click()"
+                @drop.prevent="handleDrop"
+                @dragover.prevent="dragOver = true"
+                @dragleave.prevent="dragOver = false"
+                :class="{ dragover }"
+        >
+            <div v-if="!fileName">
+                <div style="font-size: 32px; margin-bottom: 8px;">📄</div>
+                <div>Glisser-déposer ou cliquer</div>
+                <div style="font-size: 11px; color: var(--muted); margin-top: 4px;">Fichier .yaml ou .yml</div>
+            </div>
+            <div v-else>
+                <div style="color: var(--primary); font-weight: 500;">✓ {{ fileName }}</div>
+            </div>
+        </div>
+        <input
+                ref="fileInput"
+                type="file"
+                class="file-input"
+                accept=".yaml,.yml"
+                @change="handleFileSelect"
+        >
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main">
+        <div v-if="!cv" class="paper" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px;">
+            <div style="font-size: 64px; opacity: 0.3;">📋</div>
+            <div style="color: var(--muted);">Chargez un fichier YAML pour générer le CV</div>
+        </div>
+
+        <!-- Le CV rendu (cible pour PDF) -->
+        <div v-else ref="cvPaper" class="paper" id="cv-content">
+            <!-- En-tête -->
+            <header class="cv-header">
+                <h1 class="cv-name">{{ cv.lastName.toUpperCase() }} {{ cv.firstName }}</h1>
+                <div class="cv-contact">
+                    {{ cv.address.city }}, {{ cv.address.country }} |
+                    {{ cv.email }} |
+                    {{ cv.phone }}
+                    <template v-if="cv.linkedIn">
+                        | <a :href="cv.linkedIn" target="_blank">LinkedIn</a>
+                    </template>
+                </div>
+            </header>
+
+            <!-- Profil -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Profil</h2>
+                <p>Poste visé : {{ cv.jobTitle }} | Nationalité : {{ cv.nationality }}</p>
+            </section>
+
+            <!-- Expériences -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Expérience Professionnelle</h2>
+
+                <article
+                        v-for="exp in sortedExperiences"
+                        :key="exp.jobTitle + exp.dates.startTime.year"
+                        class="job"
+                >
+                    <div class="job-header">
+                        <div>
+                            <span class="job-title-line">{{ exp.jobTitle }}</span>
+                            <span class="job-company"> — {{ exp.company.name }}</span>
+                        </div>
+                        <span class="job-date">
+                                {{ formatDate(exp.dates.startTime) }} –
+                                {{ exp.dates.endTime ? formatDate(exp.dates.endTime) : 'Présent' }}
+                            </span>
+                    </div>
+
+                    <div v-if="exp.jobSubTitle" class="job-subtitle">{{ exp.jobSubTitle }}</div>
+
+                    <div class="job-location">
+                        {{ exp.location.city }}, {{ exp.location.country }}
+                        <span v-if="exp.workingTime === 'mi-temps'">(mi-temps)</span>
+                    </div>
+
+                    <!-- Tâches parsées -->
+                    <ul class="tasks-list">
+                        <li
+                                v-for="(task, i) in parseTasks(exp.tasks)"
+                                :key="i"
+                                class="task-item"
+                        >
+                            {{ task.text }}
+                            <ul v-if="task.subItems.length" class="task-sublist">
+                                <li v-for="(sub, j) in task.subItems" :key="j">{{ sub }}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+            <!-- Formation -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Formation</h2>
+
+                <div
+                        v-for="edu in cv.education"
+                        :key="edu.year + edu.diploma.name"
+                        class="education-item"
+                >
+                    <div class="education-content">
+                        <span class="edu-degree">{{ edu.diploma.degree }}</span>
+                        <span v-if="edu.diploma.europeanLevel" class="edu-eqf">
+                                (EQF {{ edu.diploma.europeanLevel }})
+                            </span>
+                        <span class="edu-field"> — {{ edu.diploma.name }}</span>
+                        <div class="edu-school">
+                            {{ edu.school.name }}, {{ edu.school.location.city }}
+                        </div>
+                    </div>
+                    <span class="edu-year">{{ edu.year }}</span>
+                </div>
+            </section>
+
+            <!-- Langues -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Langues</h2>
+                <table class="lang-table">
+                    <tr v-for="lang in cv.languages" :key="lang.language">
+                        <td>{{ lang.language }}</td>
+                        <td>
+                            {{ lang.motherTongue ? 'Langue maternelle' : 'Niveau ' + lang.level }}
+                        </td>
+                        <td>{{ lang.description }}</td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <!-- Toast notification -->
+    <div class="toast" :class="{ show: toastMessage }">{{ toastMessage }}</div>
+</div>
+
+<script>
+    const { createApp, ref, computed } = Vue;
+
+    createApp({
+        setup() {
+            const cv = ref(null);
+            const loading = ref(false);
+            const showUpload = ref(false);
+            const dragOver = ref(false);
+            const fileName = ref('');
+            const toastMessage = ref('');
+            const cvPaper = ref(null);
+            const fileInput = ref(null);
+
+            // Données de démonstration (Sisi QIN) intégrées
+            const defaultCV = `
+lastName: QIN
+firstName: Sisi
+phone: "+352661831105"
+email: sisi@qin-diaz.com
+birthDate: "1984-01-17"
+nationality: Chinoise
+jobTitle: Commerciale sédentaire
+linkedIn: "https://www.linkedin.com/in/qinsisi/?locale=en-US"
+address:
+  country: Luxembourg
+  city: Luxembourg
+education:
+  - diploma:
+      name: Gaokao (高考)
+      field: Sciences
+      degree: Baccalauréat
+      europeanLevel: 4
+    school:
+      name: Number 1 Middle School of Kunming
+      location:
+        country: Chine
+        city: Kunming
+    year: 2002
+  - diploma:
+      name: Maîtrise en Économie et Commerce International
+      field: Économie et commerce international
+      degree: Licence
+      europeanLevel: 6
+    school:
+      name: University of Chinese Overseas (华侨大学)
+      location:
+        country: Chine
+        city: Quanzhou
+    year: 2006
+  - diploma:
+      name: Master 2 Administration Générale des Entreprises
+      field: Administration d'entreprise
+      degree: Master 2
+      europeanLevel: 7
+    school:
+      name: IAE Brest - Écoles Universitaires de Management
+      location:
+        country: France
+        city: Brest
+    year: 2008
+  - diploma:
+      name: Master 2 Gestion des Ressources Humaines
+      field: Ressources humaines
+      degree: Master 2
+      europeanLevel: 7
+    school:
+      name: IAE Brest - Écoles Universitaires de Management
+      location:
+        country: France
+        city: Brest
+    year: 2009
+  - diploma:
+      name: Svenska för Invandrare, Svenska som Andraspråk
+      field: Langue
+    school:
+      name: Folkuniversitetet
+      location:
+        country: Suède
+        city: Göteborg
+    year: 2015
+languages:
+  - language: Chinois
+    motherTongue: true
+    level: C2
+    description: Langue maternelle
+  - language: Français
+    motherTongue: false
+    level: C2
+    description: Bilingue
+  - language: Anglais
+    motherTongue: false
+    level: C2
+    description: Maîtrise complète
+  - language: Allemand
+    motherTongue: false
+    level: A2
+    description: Niveau élémentaire
+  - language: Suèdois
+    motherTongue: false
+    level: A2
+    description: Niveau élémentaire
+experiences:
+  - company:
+      name: Guanfang Timber Corporation
+    location:
+      country: Chine
+      city: Beijing
+    dates:
+      startTime:
+        year: 2006
+        month: 2
+      endTime:
+        year: 2006
+        month: 3
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante de direction
+    tasks: |
+      - Calcul des salaires et indemnités d'accident du travail
+      - Gestion du stock et établissement du budget
+      - Participation à un audit financier
+
+  - company:
+      name: Aéroport Brest-Bretagne
+      linkedIn: "https://www.linkedin.com/company/aeroport-brest-bretagne"
+      sector: Transport aérien
+    location:
+      country: France
+      city: Brest
+    dates:
+      startTime:
+        year: 2008
+        month: 4
+      endTime:
+        year: 2008
+        month: 9
+    workingType: sur site
+    workingTime: temps plein
+    jobType: stagiaire
+    jobTitle: Assistante Ressources Humaines
+    jobSubTitle: Master 2 Administration des Entreprises — Projet de fin d'études
+    tasks: |
+      - Étude et mesure de l'impact de la nouvelle aérogare sur le bassin d'emploi local
+      - Participation à la préparation des bulletins de paie et tâches administratives
+      - Soutien au recrutement de nouveaux membres du personnel
+      - Conseil aux collaborateurs sur leurs droits (conditions de travail, congés maternité, avantages sociaux)
+      - Conception et réalisation d'un livret d'accueil pour les nouveaux employés
+
+  - company:
+      name: Fédération Départementale des Syndicats des Exploitants Agricoles (FDSEA) du Finistère
+      linkedIn: "https://www.linkedin.com/company/fdsea-finistere"
+      sector: Agriculture
+    location:
+      country: France
+      city: Quimper
+    dates:
+      startTime:
+        year: 2009
+        month: 4
+      endTime:
+        year: 2009
+        month: 9
+    workingType: sur site
+    workingTime: temps plein
+    jobType: stagiaire
+    jobTitle: Assistante Ressources Humaines
+    jobSubTitle: Master 2 Ressources Humaines — Projet de fin d'études
+    tasks: |
+      ▪ Élaboration d'une stratégie de GPEC et de planification des effectifs
+      ▪ Conception et réalisation de synthèses illustrées sur le code du travail et la convention collective agricole
+      ▪ Formation des dirigeants agricoles aux nouveaux processus RH
+      ▪ Conduite d'entretiens annuels d'évaluation au sein des exploitations agricoles
+      ▪ Gestion administrative et financière (paie et contrats de travail)
+
+  - company:
+      name: ABBSIL
+      sector: Entreprise de Services du Numérique (ESN)
+    location:
+      country: France
+      city: Brest
+    dates:
+      startTime:
+        year: 2010
+        month: 7
+      endTime:
+        year: 2010
+        month: 10
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante de direction
+    tasks: |
+      - Établissement des factures et gestion des relations clients
+      - Gestion des agendas, traitement des appels téléphoniques, courriers et documents administratifs
+      - Préparation de la paie
+      - Suivi des plans de formation des collaborateurs
+      - Calcul du chiffre d'affaires provisoire
+
+  - company:
+      name: O'Sushi
+      sector: Restauration rapide
+    location:
+      country: France
+      city: Lyon
+    dates:
+      startTime:
+        year: 2011
+        month: 1
+      endTime:
+        year: 2012
+        month: 5
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Manager de restaurant rapide
+    tasks: |
+      - Gestion des opérations de caisse et ouverture/fermeture de la boutique
+      - Supervision de deux boutiques (O'Sushi 7 chemins + O'Sushi Part-Dieu)
+      - Comptabilité quotidienne et gestion des stocks
+      - Organisation des plannings
+      - Accueil client, prise de commandes et service en salle
+
+  - company:
+      name: StartPeople SA
+      linkedIn: "https://www.linkedin.com/company/startpeople-sa"
+      sector: Ressources Humaines
+    location:
+      country: France
+      city: Brest
+    dates:
+      startTime:
+        year: 2012
+        month: 6
+      endTime:
+        year: 2012
+        month: 7
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Consultante RH
+    tasks: |
+      - Gestion et maintenance de la base de données des candidatures
+      - Tri des CV et convocation des candidats présélectionnés
+      - Administration du personnel intérimaire : contrats, congés payés, arrêts maladie et paie
+
+  - company:
+      name: CERATIZIT
+      linkedIn: "https://www.linkedin.com/company/ceratizit"
+      sector: Industrie métallurgique
+    location:
+      country: Luxembourg
+      city: Mamer
+    dates:
+      startTime:
+        year: 2021
+        month: 3
+      endTime:
+        year: 2025
+        month: 2
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Administratrice des ventes
+    jobSubTitle: Zone Asie-Pacifique (APAC)
+    tasks: |
+      ▪ Relation client
+        - Point de contact client dédié
+        - Suivi du cycle de vente : du devis à l'encaissement
+        - Gestion des réclamations et suivi des services après-vente
+
+      ▪ Coordination interne
+        - Interface entre les clients et les services internes (conception, production, logistique, qualité, comptabilité)
+        - Relais avec les usines et partenaires du groupe en zone Asie-Pacifique (commandes, production, logistique, facturation interne, bilans trimestriels)
+
+  - company:
+      name: CERATIZIT
+      linkedIn: "https://www.linkedin.com/company/ceratizit"
+      sector: Industrie métallurgique
+    location:
+      country: Luxembourg
+      city: Mamer
+    dates:
+      startTime:
+        year: 2025
+        month: 3
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Commerciale sédentaire
+    jobSubTitle: Zone Asie-Pacifique (APAC)
+    tasks: |
+      Promotion interne — En sus des missions précédentes :
+      - Appui des équipes commerciales : politique de prix, visites clientèle, etc.
+      - Contribution aux initiatives de développement commercial
+`;
+
+            // Chargement initial
+            const loadDefaultCV = () => {
+                try {
+                    cv.value = jsyaml.load(defaultCV);
+                    showToast('CV de démonstration chargé');
+                } catch (e) {
+                    showToast('Erreur chargement YAML: ' + e.message);
+                    console.error(e);
+                }
+            };
+
+            // Computeds
+            const sortedExperiences = computed(() => {
+                if (!cv.value?.experiences) return [];
+                return [...cv.value.experiences].sort((a, b) => {
+                    const aDate = a.dates.endTime
+                        ? new Date(a.dates.endTime.year, a.dates.endTime.month)
+                        : new Date(9999, 12);
+                    const bDate = b.dates.endTime
+                        ? new Date(b.dates.endTime.year, b.dates.endTime.month)
+                        : new Date(9999, 12);
+                    return bDate - aDate; // Inverse chronologique
+                });
+            });
+
+            // Méthodes
+            const formatDate = (ym) => {
+                return `${String(ym.month).padStart(2, '0')}/${ym.year}`;
+            };
+
+            const parseTasks = (rawTasks) => {
+                const lines = rawTasks.trim().split('\n');
+                const result = [];
+                let currentMain = null;
+
+                for (const line of lines) {
+                    const trimmed = line.trim();
+                    if (!trimmed) continue;
+
+                    const indent = line.length - line.trimStart().length;
+                    const clean = trimmed.replace(/^[▪\-]\s*/, '');
+
+                    if (trimmed.startsWith('▪') || (indent < 4 && !trimmed.startsWith('-'))) {
+                        // Élément principal
+                        currentMain = { text: clean, subItems: [] };
+                        result.push(currentMain);
+                    } else if (trimmed.startsWith('-') || indent >= 4) {
+                        // Sous-élément
+                        if (currentMain) {
+                            currentMain.subItems.push(clean);
+                        } else {
+                            result.push({ text: clean, subItems: [] });
+                        }
+                    } else if (currentMain && !trimmed.startsWith('-')) {
+                        // Continuation
+                        currentMain.text += ' ' + clean;
+                    }
+                }
+
+                return result;
+            };
+
+            const toggleUpload = () => {
+                showUpload.value = !showUpload.value;
+            };
+
+            const handleFileSelect = (event) => {
+                const file = event.target.files[0];
+                if (file) processFile(file);
+            };
+
+            const handleDrop = (event) => {
+                dragOver.value = false;
+                const file = event.dataTransfer.files[0];
+                if (file && (file.name.endsWith('.yaml') || file.name.endsWith('.yml'))) {
+                    processFile(file);
+                } else {
+                    showToast('Veuillez déposer un fichier YAML');
+                }
+            };
+
+            const processFile = (file) => {
+                fileName.value = file.name;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        cv.value = jsyaml.load(e.target.result);
+                        showToast(`CV chargé : ${cv.value.firstName} ${cv.value.lastName}`);
+                        showUpload.value = false;
+                    } catch (err) {
+                        showToast('Erreur parsing YAML: ' + err.message);
+                    }
+                };
+                reader.readAsText(file);
+            };
+
+            const exportPDF = async () => {
+                if (!cvPaper.value) return;
+
+                loading.value = true;
+
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const element = cvPaper.value;
+
+                    // Capture avec html2canvas
+                    const canvas = await html2canvas(element, {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        windowWidth: element.scrollWidth,
+                        windowHeight: element.scrollHeight
+                    });
+
+                    // Dimensions A4
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+
+                    const pageWidth = 210;
+                    const pageHeight = 297;
+                    const imgWidth = pageWidth;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                    let heightLeft = imgHeight;
+                    let position = 0;
+
+                    // Première page
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+
+                    // Pages supplémentaires si nécessaire
+                    while (heightLeft > 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+
+                    // Nom du fichier
+                    const fileName = `CV_${cv.value.lastName}_${cv.value.firstName}.pdf`;
+                    pdf.save(fileName);
+
+                    showToast('PDF téléchargé');
+                } catch (err) {
+                    console.error(err);
+                    showToast('Erreur export PDF: ' + err.message);
+
+                    // Fallback: impression navigateur
+                    window.print();
+                } finally {
+                    loading.value = false;
+                }
+            };
+
+            const showToast = (msg) => {
+                toastMessage.value = msg;
+                setTimeout(() => toastMessage.value = '', 3000);
+            };
+
+            // Init
+            loadDefaultCV();
+
+            return {
+                cv,
+                loading,
+                showUpload,
+                dragOver,
+                fileName,
+                toastMessage,
+                cvPaper,
+                fileInput,
+                sortedExperiences,
+                formatDate,
+                parseTasks,
+                toggleUpload,
+                handleFileSelect,
+                handleDrop,
+                exportPDF
+            };
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

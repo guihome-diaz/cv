@@ -15,54 +15,54 @@ education:
       field: Sciences
       degree: Baccalauréat
       europeanLevel: 4
+      year: 2002
     school:
       name: Number 1 Middle School of Kunming
       location:
         country: Chine
         city: Kunming
-    year: 2002
   - diploma:
       name: Maîtrise en Économie et Commerce International
       field: Économie et commerce international
       degree: Licence
       europeanLevel: 6
+      year: 2006
     school:
       name: University of Chinese Overseas (华侨大学)
       location:
         country: Chine
         city: Quanzhou
-    year: 2006
   - diploma:
       name: Master 2 Administration Générale des Entreprises
       field: Administration d'entreprise
       degree: Master 2
       europeanLevel: 7
+      year: 2008
     school:
       name: IAE Brest - Écoles Universitaires de Management
       location:
         country: France
         city: Brest
-    year: 2008
   - diploma:
       name: Master 2 Gestion des Ressources Humaines
       field: Ressources humaines
       degree: Master 2
       europeanLevel: 7
+      year: 2009
     school:
       name: IAE Brest - Écoles Universitaires de Management
       location:
         country: France
         city: Brest
-    year: 2009
   - diploma:
       name: Svenska för Invandrare, Svenska som Andraspråk
       field: Langue
+      year: 2015
     school:
       name: Folkuniversitetet
       location:
         country: Suède
         city: Göteborg
-    year: 2015
 languages:
   - language: Chinois
     motherTongue: true
@@ -87,9 +87,9 @@ languages:
 experiences:
   - company:
       name: Guanfang Timber Corporation
-    location:
-      country: Chine
-      city: Beijing
+      location:
+        country: Chine
+        city: Beijing
     dates:
       startTime:
         year: 2006
@@ -110,9 +110,9 @@ experiences:
       name: Aéroport Brest-Bretagne
       linkedIn: https://www.linkedin.com/company/aeroport-brest-bretagne
       sector: Transport aérien
-    location:
-      country: France
-      city: Brest
+      location:
+        country: France
+        city: Brest
     dates:
       startTime:
         year: 2008
@@ -136,9 +136,9 @@ experiences:
       name: Fédération Départementale des Syndicats des Exploitants Agricoles (FDSEA) du Finistère
       linkedIn: https://www.linkedin.com/company/fdsea-finistere
       sector: Agriculture
-    location:
-      country: France
-      city: Quimper
+      location:
+        country: France
+        city: Quimper
     dates:
       startTime:
         year: 2009
@@ -161,9 +161,9 @@ experiences:
   - company:
       name: ABBSIL
       sector: Entreprise de Services du Numérique (ESN)
-    location:
-      country: France
-      city: Brest
+      location:
+        country: France
+        city: Brest
     dates:
       startTime:
         year: 2010
@@ -185,9 +185,9 @@ experiences:
   - company:
       name: O'Sushi
       sector: Restauration rapide
-    location:
-      country: France
-      city: Lyon
+      location:
+        country: France
+        city: Lyon
     dates:
       startTime:
         year: 2011
@@ -210,9 +210,9 @@ experiences:
       name: StartPeople SA
       linkedIn: https://www.linkedin.com/company/startpeople-sa
       sector: Ressources Humaines
-    location:
-      country: France
-      city: Brest
+      location:
+        country: France
+        city: Brest
     dates:
       startTime:
         year: 2012
@@ -233,9 +233,9 @@ experiences:
       name: Port de Brest
       linkedIn: https://www.linkedin.com/company/brestport
       sector: Transport maritime
-    location:
-      country: France
-      city: Brest
+      location:
+        country: France
+        city: Brest
     dates:
       startTime:
         year: 2012
@@ -257,9 +257,9 @@ experiences:
       name: Yang Ming Marine Transport Corp.
       linkedIn: https://www.linkedin.com/company/yang-ming-marine-transport-corp
       sector: Transport maritime
-    location:
-      country: Suède
-      city: Göteborg
+      location:
+        country: Suède
+        city: Göteborg
     dates:
       startTime:
         year: 2014
@@ -280,9 +280,9 @@ experiences:
       name: Volvo Car Group
       linkedIn: https://www.linkedin.com/company/volvocars
       sector: Industrie automobile
-    location:
-      country: Suède
-      city: Göteborg
+      location:
+        country: Suède
+        city: Göteborg
     dates:
       startTime:
         year: 2015
@@ -310,9 +310,9 @@ experiences:
   - company:
       name: China-Luxembourg Chamber of Commerce
       linkedIn: https://www.linkedin.com/company/chinese-luxembourg-chamber-of-commerce-chinalux-asbl
-    location:
-      country: Luxembourg
-      city: Luxembourg
+      location:
+        country: Luxembourg
+        city: Luxembourg
     dates:
       startTime:
         year: 2017
@@ -342,9 +342,9 @@ experiences:
       name: Kylin Prime Group
       linkedIn: https://www.linkedin.com/company/kylin-prime-group
       sector: Finance
-    location:
-      country: Luxembourg
-      city: Luxembourg
+      location:
+        country: Luxembourg
+        city: Luxembourg
     dates:
       startTime:
         year: 2019
@@ -366,9 +366,9 @@ experiences:
       name: Future Citizen Institute (anciennement Kylin Prime Group)
       linkedIn: https://www.linkedin.com/company/future-citizens-institute
       sector: Finance
-    location:
-      country: Luxembourg
-      city: Luxembourg
+      location:
+        country: Luxembourg
+        city: Luxembourg
     dates:
       startTime:
         year: 2020
@@ -390,9 +390,9 @@ experiences:
       name: CERATIZIT
       linkedIn: https://www.linkedin.com/company/ceratizit
       sector: Industrie métallurgique
-    location:
-      country: Luxembourg
-      city: Mamer
+      location:
+        country: Luxembourg
+        city: Mamer
     dates:
       startTime:
         year: 2021
@@ -419,9 +419,9 @@ experiences:
       name: CERATIZIT
       linkedIn: https://www.linkedin.com/company/ceratizit
       sector: Industrie métallurgique
-    location:
-      country: Luxembourg
-      city: Mamer
+      location:
+        country: Luxembourg
+        city: Mamer
     dates:
       startTime:
         year: 2025
