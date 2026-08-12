@@ -1,0 +1,194 @@
+/* Critical CSS for PDF rendering stability */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: #1a1a1a;
+    max-width: 210mm;
+    margin: 0 auto;
+}
+
+/* === HEADER === */
+.cv-header {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.header-name {
+    font-size: 20pt;
+    font-weight: bold;
+    color: #2c3e50;
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+}
+
+.header-contact {
+    margin-top: 6px;
+    font-size: 9.5pt;
+    color: #444;
+}
+
+/* === SECTIONS === */
+.cv-section {
+    margin-bottom: 14px;
+}
+
+.cv-section-title {
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8pt;
+    color: #2c3e50;
+    border-bottom: 1px solid #95a5a6;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+/* === EXPERIENCES === */
+.experience-item {
+    margin-bottom: 12px;
+}
+
+.experience-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.job-info {
+    flex: 1;
+}
+
+.job-title {
+    font-weight: bold;
+    font-size: 10.5pt;
+}
+
+.job-company {
+    font-weight: normal;
+    color: #34495e;
+}
+
+.job-dates {
+    font-size: 10pt;
+    color: #555;
+    text-align: right;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+.job-subtitle {
+    font-size: 10pt;
+    color: #34495e;
+    font-style: italic;
+    margin-bottom: 2px;
+}
+
+.job-location {
+    font-size: 9.5pt;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+/* === EXPERIENCES TASKS === */
+.tasks {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.tasks li {
+    margin-bottom: 4px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.tasks > li {
+    font-size: 10.5pt;
+}
+
+.tasks > li::before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+    color: #2c3e50;
+}
+
+.tasks ul {
+    margin-top: 4px;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.tasks ul li {
+    font-size: 10pt;
+    color: #444;
+}
+
+.tasks ul li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    color: #888;
+}
+
+/* === EDUCATION === */
+.education-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.education-content {
+    flex: 1;
+}
+
+.edu-degree {
+    font-weight: bold;
+}
+
+.edu-eqf {
+    font-size: 9pt;
+    color: #666;
+}
+
+.edu-field {
+    font-weight: normal;
+}
+
+.edu-school {
+    font-size: 9.5pt;
+    color: #888;
+}
+
+.edu-year {
+    font-size: 10pt;
+    color: #555;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+/* === LANGUAGES === */
+.lang-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lang-table td {
+    padding: 4px 8px 4px 0;
+    font-size: 10.5pt;
+}
+
+.lang-table td:nth-child(2) {
+    color: #555;
+    font-size: 10pt;
+}
+
+.lang-table td:nth-child(3) {
+    color: #888;
+    font-size: 10pt;
+}
