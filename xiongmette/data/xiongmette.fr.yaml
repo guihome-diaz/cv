@@ -1,0 +1,438 @@
+lastName: QIN
+firstName: Sisi
+phone: +352661831105
+email: sisi@qin-diaz.com
+birthDate: 1984-01-17
+nationality: Chinoise
+jobTitle: Commerciale sédentaire
+linkedIn: https://www.linkedin.com/in/qinsisi/?locale=en-US
+address:
+  country: Luxembourg
+  city: Luxembourg
+education:
+  - diploma:
+      name: Gaokao (高考)
+      field: Sciences
+      degree: Baccalauréat
+      europeanLevel: 4
+    school:
+      name: Number 1 Middle School of Kunming
+      location:
+        country: Chine
+        city: Kunming
+    year: 2002
+  - diploma:
+      name: Maîtrise en Économie et Commerce International
+      field: Économie et commerce international
+      degree: Licence
+      europeanLevel: 6
+    school:
+      name: University of Chinese Overseas (华侨大学)
+      location:
+        country: Chine
+        city: Quanzhou
+    year: 2006
+  - diploma:
+      name: Master 2 Administration Générale des Entreprises
+      field: Administration d'entreprise
+      degree: Master 2
+      europeanLevel: 7
+    school:
+      name: IAE Brest - Écoles Universitaires de Management
+      location:
+        country: France
+        city: Brest
+    year: 2008
+  - diploma:
+      name: Master 2 Gestion des Ressources Humaines
+      field: Ressources humaines
+      degree: Master 2
+      europeanLevel: 7
+    school:
+      name: IAE Brest - Écoles Universitaires de Management
+      location:
+        country: France
+        city: Brest
+    year: 2009
+  - diploma:
+      name: Svenska för Invandrare, Svenska som Andraspråk
+      field: Langue
+    school:
+      name: Folkuniversitetet
+      location:
+        country: Suède
+        city: Göteborg
+    year: 2015
+languages:
+  - language: Chinois
+    motherTongue: true
+    level: C2
+    description: Langue maternelle
+  - language: Français
+    motherTongue: false
+    level: C2
+    description: Bilingue
+  - language: Anglais
+    motherTongue: false
+    level: C2
+    description: Maîtrise complète
+  - language: Allemand
+    motherTongue: false
+    level: A2
+    description: Niveau élémentaire
+  - language: Suèdois
+    motherTongue: false
+    level: A2
+    description: Niveau élémentaire
+experiences:
+  - company:
+      name: Guanfang Timber Corporation
+    location:
+      country: Chine
+      city: Beijing
+    dates:
+      startTime:
+        year: 2006
+        month: 2
+      endTime:
+        year: 2006
+        month: 3
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante de direction
+    tasks: |
+      - Calcul des salaires et indemnités d’accident du travail
+      - Gestion du stock et établissement du budget
+      - Participation à un audit financier
+
+  - company:
+      name: Aéroport Brest-Bretagne
+      linkedIn: https://www.linkedin.com/company/aeroport-brest-bretagne
+      sector: Transport aérien
+    location:
+      country: France
+      city: Brest
+    dates:
+      startTime:
+        year: 2008
+        month: 4
+      endTime:
+        year: 2008
+        month: 9
+    workingType: sur site
+    workingTime: temps plein
+    jobType: stagiaire
+    jobTitle: Assistante Ressources Humaines
+    jobSubTitle: Master 2 Administration des Entreprises — Projet de fin d’études
+    tasks: |
+      - Étude et mesure de l’impact de la nouvelle aérogare sur le bassin d’emploi local
+      - Participation à la préparation des bulletins de paie et tâches administratives
+      - Soutien au recrutement de nouveaux membres du personnel
+      - Conseil aux collaborateurs sur leurs droits (conditions de travail, congés maternité, avantages sociaux)
+      - Conception et réalisation d'un livret d'accueil pour les nouveaux employés
+
+  - company:
+      name: Fédération Départementale des Syndicats des Exploitants Agricoles (FDSEA) du Finistère
+      linkedIn: https://www.linkedin.com/company/fdsea-finistere
+      sector: Agriculture
+    location:
+      country: France
+      city: Quimper
+    dates:
+      startTime:
+        year: 2009
+        month: 4
+      endTime:
+        year: 2009
+        month: 9
+    workingType: sur site
+    workingTime: temps plein
+    jobType: stagiaire
+    jobTitle: Assistante Ressources Humaines
+    jobSubTitle: Master 2 Ressources Humaines — Projet de fin d’études
+    tasks: |  
+      - Élaboration d'une stratégie de GPEC et de planification des effectifs
+      - Conception et réalisation de synthèses illustrées sur le code du travail et la convention collective agricole
+      - Formation des dirigeants agricoles aux nouveaux processus RH
+      - Conduite d’entretiens annuels d’évaluation au sein des exploitations agricoles
+      - Gestion administrative et financière (paie et contrats de travail)
+
+  - company:
+      name: ABBSIL
+      sector: Entreprise de Services du Numérique (ESN)
+    location:
+      country: France
+      city: Brest
+    dates:
+      startTime:
+        year: 2010
+        month: 7
+      endTime:
+        year: 2010
+        month: 10
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante de direction
+    tasks: |
+      - Établissement des factures et gestion des relations clients
+      - Gestion des agendas, traitement des appels téléphoniques, courriers et documents administratifs
+      - Préparation de la paie
+      - Suivi des plans de formation des collaborateurs
+      - Calcul du chiffre d'affaires provisoire
+
+  - company:
+      name: O'Sushi
+      sector: Restauration rapide
+    location:
+      country: France
+      city: Lyon
+    dates:
+      startTime:
+        year: 2011
+        month: 1
+      endTime:
+        year: 2012
+        month: 5
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Manager de restaurant rapide
+    tasks: |
+      - Gestion des opérations de caisse et ouverture/fermeture de la boutique
+      - Supervision de deux boutiques (O’Sushi 7 chemins + O’Sushi Part-Dieu)
+      - Comptabilité quotidienne et gestion des stocks
+      - Organisation des plannings
+      - Accueil client, prise de commandes et service en salle
+
+  - company:
+      name: StartPeople SA
+      linkedIn: https://www.linkedin.com/company/startpeople-sa
+      sector: Ressources Humaines
+    location:
+      country: France
+      city: Brest
+    dates:
+      startTime:
+        year: 2012
+        month: 6
+      endTime:
+        year: 2012
+        month: 7
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Consultante RH
+    tasks: |
+      - Gestion et maintenance de la base de données des candidatures
+      - Tri des CV et convocation des candidats présélectionnés
+      - Administration du personnel intérimaire : contrats, congés payés, arrêts maladie et paie
+
+  - company:
+      name: Port de Brest
+      linkedIn: https://www.linkedin.com/company/brestport
+      sector: Transport maritime
+    location:
+      country: France
+      city: Brest
+    dates:
+      startTime:
+        year: 2012
+        month: 8
+      endTime:
+        year: 2012
+        month: 10
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Correspondante RH
+    tasks: |
+      - Gestion administrative des intérimaires au Port de Brest
+      - Conception de plans de formation individuels et recherche de financements (CIF, DIF, etc.)
+      - Rédaction de la documentation RH requise pour la certification ISO 9001
+      - Suivi de la mise en oeuvre des nouvelles procédures RH
+
+  - company:
+      name: Yang Ming Marine Transport Corp.
+      linkedIn: https://www.linkedin.com/company/yang-ming-marine-transport-corp
+      sector: Transport maritime
+    location:
+      country: Suède
+      city: Göteborg
+    dates:
+      startTime:
+        year: 2014
+        month: 6
+      endTime:
+        year: 2014
+        month: 9
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante import / export
+    tasks: |
+      - Coordination logistique : planification de l’arrivée des conteneurs et suivi des livraisons
+      - Relation client : avertir les clients lors de l’arrivée des marchandises
+      - Gestion administrative : tenue de la comptabilité quotidienne et documents import/export
+
+  - company:
+      name: Volvo Car Group
+      linkedIn: https://www.linkedin.com/company/volvocars
+      sector: Industrie automobile
+    location:
+      country: Suède
+      city: Göteborg
+    dates:
+      startTime:
+        year: 2015
+        month: 8
+      endTime:
+        year: 2015
+        month: 12
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante Gestion de Trésorerie
+    jobSubTitle: Participation au projet d’harmonisation des départements financiers de Volvo
+    tasks: |
+      ▪ Partie chinoise
+        - Participation à la mise en place d’un système de trésorerie transfrontalière en RMB entre les entités chinoises et le siège social situé en Suède.
+        - Coordination avec la banque chinoise partenaire
+        - Mapping des données comptables entre les systèmes européens et chinois
+      
+      ▪ Partie russe
+        - Participation à l'analyse comparative des services et produits bancaires russes afin de sélectionner un partenaire financier
+      
+      ▪ Europe
+        - Suivi des incidents de paiement et de la relation Volvo Finance / ING
+
+  - company:
+      name: China-Luxembourg Chamber of Commerce
+      linkedIn: https://www.linkedin.com/company/chinese-luxembourg-chamber-of-commerce-chinalux-asbl
+    location:
+      country: Luxembourg
+      city: Luxembourg
+    dates:
+      startTime:
+        year: 2017
+        month: 12
+      endTime:
+        year: 2019
+        month: 2
+    workingType: sur site
+    workingTime: mi-temps
+    jobType: employée
+    jobTitle: Assistante chef de projet
+    tasks: |
+      ▪ Comptabilité
+        - Préparation des documents comptables pour la direction
+        - Gestion opérationnelle : facturation et interface avec le cabinet d’audit
+        - Traitement des tâches administratives courantes
+      
+      ▪ Administration
+        - Élaboration du calendrier événementiel 2018–2019
+        - Organisation et coordination des événements (logistique, accueil des participants)
+        - Gestion des adhésions
+      
+      ▪ Autres missions
+        - Contribution à la mise en œuvre du plan marketing 2018–2019
+
+  - company:
+      name: Kylin Prime Group
+      linkedIn: https://www.linkedin.com/company/kylin-prime-group
+      sector: Finance
+    location:
+      country: Luxembourg
+      city: Luxembourg
+    dates:
+      startTime:
+        year: 2019
+        month: 3
+      endTime:
+        year: 2020
+        month: 7
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante de direction
+    tasks: |
+      - Gestion des processus RH : mise en œuvre des procédures conformément à la législation locale (recrutement, intégration, formation, paie, gestion des fins de contrat)
+      - Administration et finance : facturation, contrôle des dépenses, rapprochement des notes de frais
+      - Assistanat de direction : gestion du planning, rédaction de comptes-rendus et organisation des déplacements professionnels
+      - Principale interlocutrice pour les fournisseurs et collaborateurs locaux
+
+  - company:
+      name: Future Citizen Institute (anciennement Kylin Prime Group)
+      linkedIn: https://www.linkedin.com/company/future-citizens-institute
+      sector: Finance
+    location:
+      country: Luxembourg
+      city: Luxembourg
+    dates:
+      startTime:
+        year: 2020
+        month: 8
+      endTime:
+        year: 2021
+        month: 2
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Assistante de direction
+    tasks: |
+      Promotion interne — En sus des missions précédentes :
+      - Gestion des formalités légales : mise à jour des données au registre de commerce (RCS)
+      - Protection des actifs intellectuels : enregistrement et suivi des dépôts (EPO et EUIPO)
+      - Mise à jour des réseaux sociaux (Facebook, LinkedIn)
+
+  - company:
+      name: CERATIZIT
+      linkedIn: https://www.linkedin.com/company/ceratizit
+      sector: Industrie métallurgique
+    location:
+      country: Luxembourg
+      city: Mamer
+    dates:
+      startTime:
+        year: 2021
+        month: 3
+      endTime:
+        year: 2025
+        month: 2
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Administratrice des ventes
+    jobSubTitle: Zone Asie-Pacifique (APAC)
+    tasks: |
+      ▪ Relation client
+        - Point de contact client dédié
+        - Suivi du cycle de vente : du devis à l'encaissement
+        - Gestion des réclamations et suivi des services après-vente
+      
+      ▪ Coordination interne
+        - Interface entre les clients et les services internes (conception, production, logistique, qualité, comptabilité)
+        - Relais avec les usines et partenaires du groupe en zone Asie-Pacifique (commandes, production, logistique, facturation interne, bilans trimestriels)
+
+  - company:
+      name: CERATIZIT
+      linkedIn: https://www.linkedin.com/company/ceratizit
+      sector: Industrie métallurgique
+    location:
+      country: Luxembourg
+      city: Mamer
+    dates:
+      startTime:
+        year: 2025
+        month: 3
+    workingType: sur site
+    workingTime: temps plein
+    jobType: employée
+    jobTitle: Commerciale sédentaire
+    jobSubTitle: Zone Asie-Pacifique (APAC)
+    tasks: |
+      Promotion interne — En sus des missions précédentes :
+      - Appui des équipes commerciales : politique de prix, visites clientèle, etc.
+      - Contribution aux initiatives de développement commercial
+

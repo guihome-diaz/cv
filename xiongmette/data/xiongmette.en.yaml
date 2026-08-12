@@ -3,9 +3,9 @@ firstName: Sisi
 phone: +352661831105
 email: sisi@qin-diaz.com
 birthDate: 1984-01-17
-nationality: chinese
-jobTitle: Inside sales
-linkedin: https://www.linkedin.com/in/qinsisi/?locale=en-US
+nationality: Chinese
+jobTitle: Inside Sales Specialist
+linkedIn: https://www.linkedin.com/in/qinsisi/?locale=en-US
 address:
   country: Luxembourg
   city: Luxembourg
@@ -13,10 +13,10 @@ education:
   - diploma:
       name: Gaokao (高考)
       field: Sciences
-      degree: A level
+      degree: A-Level
       europeanLevel: 4
     school:
-      name: Number 1 middle school of Kunming
+      name: Number 1 Middle School of Kunming
       location:
         country: China
         city: Kunming
@@ -55,7 +55,7 @@ education:
         city: Brest
     year: 2009
   - diploma:
-      name: Svenska för Invandrare, Svenska som andraspråk
+      name: Svenska för Invandrare, Svenska som Andraspråk
       field: Language
     school:
       name: Folkuniversitetet
@@ -64,26 +64,26 @@ education:
         city: Göteborg
     year: 2015
 languages:
-  - Chinese:
-      motherTongue: true
-      level: C2
-      description: Native or bilingual proficiency
-  - French:
-      motherTongue: False
-      level: C2
-      description: Native or bilingual proficiency
-  - English:
-      motherTongue: False
-      level: C2
-      description: Native or bilingual proficiency
-  - German:
-      motherTongue: False
-      level: A2
-      description: Limited working proficiency
-  - Swedish:
-      motherTongue: False
-      level: A2
-      description: Limited working proficiency
+  - language: Chinese
+    motherTongue: true
+    level: C2
+    description: Native or bilingual proficiency
+  - language: French
+    motherTongue: false
+    level: C2
+    description: Native or bilingual proficiency
+  - language: English
+    motherTongue: false
+    level: C2
+    description: Native or bilingual proficiency
+  - language: German
+    motherTongue: false
+    level: A2
+    description: Limited working proficiency
+  - language: Swedish
+    motherTongue: false
+    level: A2
+    description: Limited working proficiency
 experiences:
   - company:
       name: Guanfang Timber Corporation
@@ -93,32 +93,33 @@ experiences:
     dates:
       startTime:
         year: 2006
-        month: 02
+        month: 2
       endTime:
         year: 2006
-        month: 03
+        month: 3
     workingType: on-site
     workingTime: full-time
     jobType: employee
     jobTitle: Director's Assistant
     tasks: |
       - Performed hiring interviews and staff recruitment
-      - Established salary and workmen's compensation
-      - Participation to a financial audit
+      - Established salary and workers' compensation
+      - Participated in a financial audit
 
   - company:
       name: Aéroport Brest-Bretagne
-      linkedin: https://www.linkedin.com/company/aeroport-brest-bretagne
+      linkedIn: https://www.linkedin.com/company/aeroport-brest-bretagne
+      sector: Air transportation
     location:
       country: France
       city: Brest
     dates:
       startTime:
         year: 2008
-        month: 04
+        month: 4
       endTime:
         year: 2008
-        month: 09
+        month: 9
     workingType: on-site
     workingTime: full-time
     jobType: internship
@@ -132,23 +133,24 @@ experiences:
       - Designed and produced the welcome booklet
 
   - company:
-      name: Fédération Départementale des Syndicats des Exploitants Agricoles
-      linkedin: https://www.linkedin.com/company/fdsea-finistere
+      name: Fédération Départementale des Syndicats des Exploitants Agricoles (FDSEA) du Finistère
+      linkedIn: https://www.linkedin.com/company/fdsea-finistere
+      sector: Agriculture
     location:
       country: France
       city: Quimper
     dates:
       startTime:
         year: 2009
-        month: 04
+        month: 4
       endTime:
         year: 2009
-        month: 09
+        month: 9
     workingType: on-site
     workingTime: full-time
     jobType: internship
     jobTitle: Human Resources Assistant
-    jobSubTitle: Master 2 Human Resources — end-of-study project
+    jobSubTitle: Master 2 Human Resources — End-of-Study Project
     tasks: |
       - Developed an employee expertise and workforce planning strategy
       - Designed and produced welcome booklets for new hires
@@ -158,13 +160,14 @@ experiences:
 
   - company:
       name: ABBSIL
+      sector: IT services
     location:
       country: France
       city: Brest
     dates:
       startTime:
         year: 2010
-        month: 07
+        month: 7
       endTime:
         year: 2010
         month: 10
@@ -180,39 +183,41 @@ experiences:
 
   - company:
       name: O'Sushi
+      sector: Food industry
     location:
       country: France
       city: Lyon
     dates:
       startTime:
         year: 2011
-        month: 01
+        month: 1
       endTime:
         year: 2012
-        month: 05
+        month: 5
     workingType: on-site
     workingTime: full-time
     jobType: employee
     jobTitle: Fast food restaurant manager
     tasks: |
       - Managed cash register operations
-      - Shops supervision (O'Sushi 7 chemins and O'Sushi Part-Dieu)
+      - Supervised shops (O'Sushi 7 chemins and O'Sushi Part-Dieu)
       - Oversaw stock management
       - Served as waitress
 
   - company:
       name: StartPeople SA
-      linkedin: https://www.linkedin.com/company/startpeople-sa
+      linkedIn: https://www.linkedin.com/company/startpeople-sa
+      sector: Human Resources
     location:
       country: France
       city: Brest
     dates:
       startTime:
         year: 2012
-        month: 06
+        month: 6
       endTime:
         year: 2012
-        month: 07
+        month: 7
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -222,14 +227,15 @@ experiences:
 
   - company:
       name: Port de Brest
-      linkedin: https://www.linkedin.com/company/brestport
+      linkedIn: https://www.linkedin.com/company/brestport
+      sector: Maritime transport
     location:
       country: France
       city: Brest
     dates:
       startTime:
         year: 2012
-        month: 08
+        month: 8
       endTime:
         year: 2012
         month: 10
@@ -244,35 +250,37 @@ experiences:
 
   - company:
       name: Yang Ming Marine Transport Corp.
-      linkedin: https://www.linkedin.com/company/yang-ming-marine-transport-corp
+      linkedIn: https://www.linkedin.com/company/yang-ming-marine-transport-corp
+      sector: Maritime transport
     location:
       country: Sweden
       city: Göteborg
     dates:
       startTime:
         year: 2014
-        month: 06
+        month: 6
       endTime:
         year: 2014
-        month: 09
+        month: 9
     workingType: on-site
     workingTime: full-time
     jobType: employee
-    jobTitle: Import/export assistant
+    jobTitle: Import/export Assistant
     tasks: |
       - Tracked container shipments
       - Completed import-export documentation
 
   - company:
       name: Volvo Car Group
-      linkedin: https://www.linkedin.com/company/volvocars
+      linkedIn: https://www.linkedin.com/company/volvocars
+      sector: Automotive industry
     location:
       country: Sweden
       city: Göteborg
     dates:
       startTime:
         year: 2015
-        month: 08
+        month: 8
       endTime:
         year: 2015
         month: 12
@@ -286,15 +294,15 @@ experiences:
         - Collaborated with the Chinese bank hosting Volvo’s primary account
         - Mapped data between Chinese and Swedish account numbers and information systems
 
-      ▪ Russian operations:
+      ▪ Russian operations
         - Contributed to the assessment and comparison of Russian banking products and services
-
-      ▪ European operations:
+      
+      ▪ European operations
         - Managed European help-desk operations, fostering partnerships with ING
 
   - company:
       name: China-Luxembourg Chamber of Commerce
-      linkedin: https://www.linkedin.com/company/chinese-luxembourg-chamber-of-commerce-chinalux-asbl
+      linkedIn: https://www.linkedin.com/company/chinese-luxembourg-chamber-of-commerce-chinalux-asbl
     location:
       country: Luxembourg
       city: Luxembourg
@@ -304,45 +312,46 @@ experiences:
         month: 12
       endTime:
         year: 2019
-        month: 02
+        month: 2
     workingType: on-site
     workingTime: part-time
     jobType: employee
     jobTitle: Manager Assistant
     tasks: |
-      ▪ Accounting:
+      ▪ Accounting
         - Handled daily administration and issued invoices
         - Prepared accounting documents for the operations manager
         - Assisted with audit documentation and liaised with Intertrust (Honorary Auditor) throughout the process
 
-      ▪ Administration:
+      ▪ Administration
         - Assisted the project manager and Events Committee
         - Supported events execution: preparation, guest reception, and query resolution
         - Maintained general filing, membership records and RCS filings
 
-      ▪ Other:
-        - Supported the operations and project managers in implementing the 2018-2019 Marketing Plan
+      ▪ Other
+        - Supported the operations and project managers in implementing the 2018–2019 Marketing Plan
 
   - company:
       name: Kylin Prime Group
-      linkedin: https://www.linkedin.com/company/kylin-prime-group
+      linkedIn: https://www.linkedin.com/company/kylin-prime-group
+      sector: Finance
     location:
       country: Luxembourg
       city: Luxembourg
     dates:
       startTime:
         year: 2019
-        month: 03
+        month: 3
       endTime:
         year: 2020
-        month: 07
+        month: 7
     workingType: on-site
     workingTime: full-time
     jobType: employee
     jobTitle: Administrative Assistant
     tasks: |
-      - Collaborated with other KYLIN PRIME GROUP offices on HR matters (recruitment, onboarding, staff administration, payroll, training, and benefits)
-      - Monitored office expanses, reconciled reports, and issued invoices
+      - Collaborated with other Kylin Prime Group offices on HR matters (recruitment, onboarding, staff administration, payroll, training, and benefits)
+      - Monitored office expenses, reconciled reports, and issued invoices
       - Handled administrative requests from office members
       - Ordered office supplies and researched new suppliers and deals
       - Served as primary point of contact for local suppliers
@@ -351,47 +360,49 @@ experiences:
 
   - company:
       name: Future Citizen Institute (formerly Kylin Prime Group)
-      linkedin: https://www.linkedin.com/company/future-citizens-institute
+      linkedIn: https://www.linkedin.com/company/future-citizens-institute
+      sector: Finance
     location:
       country: Luxembourg
       city: Luxembourg
     dates:
       startTime:
         year: 2020
-        month: 08
+        month: 8
       endTime:
         year: 2021
-        month: 02
+        month: 2
     workingType: on-site
     workingTime: full-time
     jobType: employee
-    jobTitle: Administrative Assistant
+    jobTitle: Office Administrator
     tasks: |
-      Retaining all prior responsibilities, I have taken on the following:
-      - Managed social media platforms (Facebook, Linkedin)
+      Retaining all prior responsibilities, took on the following:
+      - Managed social media platforms (Facebook, LinkedIn)
       - Filed and updated RCS registrations
       - Managed company intellectual property registration and renewals (EUIPO, EPO) 
 
   - company:
       name: CERATIZIT
-      linkedin: https://www.linkedin.com/company/ceratizit
+      linkedIn: https://www.linkedin.com/company/ceratizit
+      sector: Metallurgy industry
     location:
       country: Luxembourg
       city: Mamer
     dates:
       startTime:
         year: 2021
-        month: 03
+        month: 3
       endTime:
         year: 2025
-        month: 02
+        month: 2
     workingType: on-site
     workingTime: full-time
     jobType: employee
     jobTitle: Sales Administrator
-    jobSubTitle: Asia-Pacific area (APAC)
+    jobSubTitle: Asia-Pacific Area (APAC)
     tasks: |
-      ▪ Customer relationship
+      ▪ Customer relations
         - Serve as dedicated point of contact for customers
         - Manage the quote-to-cash process
         - Handle claims and post-sales activities for existing customers
@@ -402,21 +413,22 @@ experiences:
 
   - company:
       name: CERATIZIT
-      linkedin: https://www.linkedin.com/company/ceratizit
+      linkedIn: https://www.linkedin.com/company/ceratizit
+      sector: Metallurgy industry
     location:
       country: Luxembourg
       city: Mamer
     dates:
       startTime:
         year: 2025
-        month: 03
+        month: 3
     workingType: on-site
     workingTime: full-time
     jobType: employee
     jobTitle: Inside Sales Specialist
-    jobSubTitle: Asia-Pacific area (APAC)
+    jobSubTitle: Asia-Pacific Area (APAC)
     tasks: |
-      Retaining all prior responsibilities, I have taken on the following:
+      Retaining all prior responsibilities, took on the following:
       - Support the sales team with pricing policies and customer visits
       - Contribute to new business development initiatives
       - Execute segment strategy through end-to-end quotation, pricing, and order fulfillment
