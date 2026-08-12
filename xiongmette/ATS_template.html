@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>CV {{ firstName }} {{ lastName }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.45;
+            color: #1a1a1a;
+        }
+
+        /* En-tête */
+        .header {
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2c3e50;
+        }
+
+        .name {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #2c3e50;
+            letter-spacing: 0.5pt;
+            text-transform: uppercase;
+        }
+
+        .contact-line {
+            margin-top: 6px;
+            font-size: 9.5pt;
+            color: #444;
+        }
+
+        .contact-line a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.8pt;
+            color: #2c3e50;
+            border-bottom: 1px solid #95a5a6;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+
+        /* Expériences */
+        .job {
+            margin-bottom: 12px;
+        }
+
+        .job:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 10.5pt;
+        }
+
+        .job-company {
+            font-weight: normal;
+            color: #34495e;
+        }
+
+        .job-subtitle {
+            font-style: italic;
+            color: #555;
+            font-size: 9.5pt;
+        }
+
+        .job-date {
+            font-size: 9.5pt;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        .job-location {
+            font-size: 9pt;
+            color: #666;
+            margin-top: 1px;
+        }
+
+        /* Listes de tâches */
+        .tasks {
+            margin-top: 5px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .tasks li {
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 2px;
+            font-size: 10pt;
+        }
+
+        .tasks li::before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+        }
+
+        .tasks .sub-list {
+            margin-top: 3px;
+            margin-bottom: 4px;
+        }
+
+        .tasks .sub-list li::before {
+            content: "-";
+        }
+
+        /* Formation */
+        .education-item {
+            margin-bottom: 6px;
+        }
+
+        .edu-degree {
+            font-weight: bold;
+        }
+
+        .edu-field {
+            color: #444;
+        }
+
+        .edu-school {
+            color: #555;
+            font-size: 9.5pt;
+        }
+
+        .edu-year {
+            float: right;
+            color: #555;
+            font-size: 9.5pt;
+        }
+
+        /* Langues */
+        .lang-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .lang-table td {
+            padding: 2px 0;
+            font-size: 10pt;
+        }
+
+        .lang-table td:first-child {
+            width: 25%;
+            font-weight: 500;
+        }
+
+        .lang-table td:nth-child(2) {
+            width: 20%;
+            color: #555;
+            font-size: 9.5pt;
+        }
+
+        .lang-table td:last-child {
+            color: #444;
+            font-size: 9.5pt;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- EN-TÊTE -->
+    <div class="header">
+        <div class="name">{{ lastName }} {{ firstName }}</div>
+        <div class="contact-line">
+            {{ address.city }}, {{ address.country }} |
+            {{ email }} |
+            {{ phone }}
+            {% if linkedIn %}| <a href="{{ linkedIn }}">LinkedIn</a>{% endif %}
+        </div>
+    </div>
+
+    <!-- PROFIL -->
+    <div class="section">
+        <div class="section-title">Profil</div>
+        <p>Poste visé : {{ jobTitle }} | Nationalité : {{ nationality }}</p>
+    </div>
+
+    <!-- EXPÉRIENCE PROFESSIONNELLE -->
+    <div class="section">
+        <div class="section-title">Expérience Professionnelle</div>
+
+        {% for exp in experiences|reverse %}
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-title">{{ exp.jobTitle }}</span>
+                    <span class="job-company"> — {{ exp.company.name }}</span>
+                    {% if exp.jobSubTitle %}
+                    <div class="job-subtitle">{{ exp.jobSubTitle }}</div>
+                    {% endif %}
+                </div>
+                <span class="job-date">
+                    {{ "%02d"|format(exp.dates.startTime.month) }}/{{ exp.dates.startTime.year }} –
+                    {% if exp.dates.endTime %}
+                    {{ "%02d"|format(exp.dates.endTime.month) }}/{{ exp.dates.endTime.year }}
+                    {% else %}
+                    Présent
+                    {% endif %}
+                </span>
+            </div>
+            <div class="job-location">{{ exp.location.city }}, {{ exp.location.country }}{% if exp.workingTime == "mi-temps" %} (mi-temps){% endif %}</div>
+
+            {# Parsing des tâches avec support sous-listes #}
+            {{ exp.tasks | render_tasks }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- FORMATION -->
+    <div class="section">
+        <div class="section-title">Formation</div>
+
+        {% for edu in education %}
+        <div class="education-item">
+            <span class="edu-year">{{ edu.year }}</span>
+            <span class="edu-degree">{{ edu.diploma.degree }}</span>
+            {% if edu.diploma.europeanLevel %}
+            <span style="color: #666; font-size: 9pt;">(EQF {{ edu.diploma.europeanLevel }})</span>
+            {% endif %}
+            — <span class="edu-field">{{ edu.diploma.name }}</span>
+            <div class="edu-school">{{ edu.school.name }}, {{ edu.school.location.city }} ({{ edu.school.location.country }})</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- LANGUES -->
+    <div class="section">
+        <div class="section-title">Langues</div>
+        <table class="lang-table">
+            {% for lang in languages %}
+            <tr>
+                <td>{{ lang.language }}</td>
+                <td>{% if lang.motherTongue %}Langue maternelle{% else %}Niveau {{ lang.level }}{% endif %}</td>
+                <td>{{ lang.description }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
