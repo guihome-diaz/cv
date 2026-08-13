@@ -6,7 +6,7 @@ public record Diploma(
         String name,
         String field,
         int year,
-        Optional<String> degree,
-        Optional<Integer> europeanLevel
+        String degree,
+        Integer europeanLevel
 ) {
 }

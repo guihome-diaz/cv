@@ -22,7 +22,7 @@ public class ThymeleafRender {
 
     private TemplateEngine configureTemplateEngine() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("templates");
+        templateResolver.setPrefix("templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
@@ -44,7 +44,6 @@ public class ThymeleafRender {
 
         // Computed variables for template convenience
         context.setVariable("cv", cv);
-        context.setVariable("hasLinkedIn", cv.linkedIn().isPresent());
         context.setVariable("fullName", cv.firstName() + " " + cv.lastName());
 
         // Apply template

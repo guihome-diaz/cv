@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TaskParser {
 
-    public List<TaskItem> parse(String rawTasks) {
+    public static List<TaskItem> parse(String rawTasks) {
         List<TaskItem> result = new ArrayList<>();
         TaskItem currentMain = null;
 

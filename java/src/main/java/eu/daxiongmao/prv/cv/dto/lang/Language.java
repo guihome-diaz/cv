@@ -6,6 +6,6 @@ public record Language(
         String language,
         boolean motherTongue,
         String level,
-        Optional<String> description
+        String description
 ) {
 }

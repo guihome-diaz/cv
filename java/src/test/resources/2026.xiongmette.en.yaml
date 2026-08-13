@@ -1,8 +1,13 @@
 lastName: QIN
 firstName: Sisi
-phone: +352661831105
+gender: Female
+phone: +352661840117
+phoneDisplay: (+352) 661 84 01 17
 email: sisi@qin-diaz.com
-birthDate: 1984-01-17
+birth:
+  date: 1984-01-17
+  country: China
+  city: Kunming
 nationality: Chinese
 jobTitle: Inside Sales Specialist
 linkedIn: https://www.linkedin.com/in/qinsisi/?locale=en-US
@@ -380,7 +385,7 @@ experiences:
       Retaining all prior responsibilities, took on the following:
       - Managed social media platforms (Facebook, LinkedIn)
       - Filed and updated RCS registrations
-      - Managed company intellectual property registration and renewals (EUIPO, EPO) 
+      - Managed company intellectual property registration and renewals (EUIPO, EPO)
 
   - company:
       name: CERATIZIT
@@ -406,7 +411,7 @@ experiences:
         - Serve as dedicated point of contact for customers
         - Manage the quote-to-cash process
         - Handle claims and post-sales activities for existing customers
-        
+      
       ▪ Internal coordination
         - Coordinate between customers and internal departments (design, production, supply chain, quality)
         - Serve as liaison between the Luxembourg factory and Asian partner or affiliate factories (orders, production follow-up, intercompany pricing, and quarterly reporting)

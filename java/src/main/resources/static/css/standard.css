@@ -59,6 +59,21 @@ body {
     align-items: baseline;
 }
 
+.experience-subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    font-style: italic;
+    font-size: 0.95em;
+    color: var(--color-text-secondary);
+}
+
+.company-location {
+    font-size: 0.9em;
+    color: var(--color-text-secondary);
+}
+
 .job-info {
     flex: 1;
 }

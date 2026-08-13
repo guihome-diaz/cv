@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${cv.firstName} + ' ' + ${cv.lastName}">Curriculum Vitae</title>
+    <link rel="stylesheet" th:href="@{../static/css/standard.css}" href="../static/css/standard.css" media="all">
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header class="cv-header" aria-label="Personal data">
+        <h1 class="header-name" th:text="${cv.firstName} + ' ' + ${cv.lastName}" id="name" aria-label="Name">FirstName LastName</h1>
+        <p><span th:text="${cv.jobTitle}" aria-label="Job title" id="jobTitle">jobTitle</span></p>
+        <div class="header-contact">
+            <!-- Contacts -->
+            <p aria-label="contact">
+                <span aria-hidden="true">📧</span> <a id="email" th:href="'mailto:' + ${cv.email}" th:text="${cv.email}" th:title="${cv.email}" aria-label="Email">Email</a>
+                | <span aria-hidden="true">📞</span> <a id="phone" th:href="'tel:' + ${cv.phone}" th:text="${cv.phoneDisplay}" th:title="${cv.phoneDisplay}" aria-label="Phone">Phone</a>
+                | <span aria-hidden="true">🌐</span> <a id="linkedIn" th:href="${cv.linkedIn}" th:text="LinkedIn" th:title="LinkedIn" target="_blank" aria-label="LinkedIn">_LinkedIn_</a>
+            </p>
+            <!-- Civility -->
+            <p>
+                <span th:text="#{header.gender}">i18n_Gender:</span> <span th:text="${cv.gender}" aria-label="Gender">gender</span>
+                | <span th:text="#{header.citizenship}">i18n_Nationality:</span> <span th:text="${cv.nationality}" aria-label="Nationality">nationality</span>
+                | <span th:text="#{header.birthDate}">i18n_Birth date:</span> <span th:text="${cv.birth.date}" aria-label="Birth date">birthDate</span>
+                | <span th:text="#{header.birthPlace}">i18n_Place of birth:</span> <span th:text=" ${cv.birth.city} + ', ' + ${cv.birth.country}" aria-label="Place of birth">birthPlace</span>
+            </p>
+            <!-- Home address -->
+            <p>
+                <span th:text="#{header.address}">i18n_header.address</span>&nbsp;<span id="address" th:text="${cv.address.city + ', ' + cv.address.country}">City, Country</span>
+            </p>
+        </div>
+    </header>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main>
+
+        <!-- ====== EXPERIENCE ====== -->
+        <section class="cv-section">
+            <h2 class="cv-section-title" th:text="#{section.header.experience}">Experience</h2>
+            <div class="experience-item" th:each="exp : ${cv.experiences}">
+                <!-- Mission title - Company   ...  Dates -->
+                <div class="experience-header">
+                    <div class="experience-main">
+                        <span class="job-title" th:text="${exp.jobTitle} + ' - ' + ${exp.company.name}">JobTitle and CompanyName</span>
+                    </div>
+                    <div class="experience-dates">
+                        <span th:text="${exp.dates.startTime}">StartTime</span> / <span th:text="${exp.dates.endTime != null} ? ${exp.dates.endTime} : #{experience.date.present}">EndTime</span>
+                    </div>
+                </div>
+                <!-- Mission subtitle -->
+                <div class="experience-subheader" th:if="${exp.jobSubtitle != null}" th:text="${exp.jobSubtitle}"></div>
+                <!-- Mission location -->
+                <div class="company-location">
+                    <span th:text="${exp.company.location.city} + ', ' + ${exp.company.location.country}">city, country</span>
+                </div>
+                <div class="task-list">
+                    <span th:text="${exp.tasks}">Tasks</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== EDUCATION ====== -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Formation</h2>
+
+            <!-- Use pre-sorted list from context -->
+            <div th:each="edu, iterStat : ${cv.education}" class="cv-education-item">
+                <div class="edu-title" th:text="${edu.diploma.name}">Diploma</div>
+                <div class="edu-eqf" th:if="${edu.diploma.europeanLevel}" th:text="#{education.eqf} + ${edu.diploma.europeanLevel()}">Diploma</div>
+                <div class="edu-time">
+                    <span th:text="${edu.diploma.year}">eduTime</span> - <span th:text="${edu.school.location.city} + ', ' + ${edu.school.location.country}"></span>
+                </div>
+                <div class="cv-margin-line"></div>
+            </div>
+        </section>
+
+        <!-- LANGUES -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Langues</h2>
+
+            <table class="lang-table">
+                <tr th:each="lang : ${cv.languages}">
+                    <td th:text="${lang.language}">Langue</td>
+                    <td th:text="${lang.motherTongue} ? 'Langue maternelle' : |Niveau ${lang.level}|">Niveau</td>
+                    <td th:text="${lang.description}">Description</td>
+                </tr>
+            </table>
+        </section>
+
+    </main>
+
+</body>
+</html>

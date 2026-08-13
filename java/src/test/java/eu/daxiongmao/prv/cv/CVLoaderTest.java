@@ -22,14 +22,15 @@ class CVLoaderTest {
         Assertions.assertNotNull(cv);
         Assertions.assertEquals("QIN", cv.lastName());
         Assertions.assertEquals("Sisi", cv.firstName());
-        Assertions.assertEquals("+352661831105", cv.phone());
+        Assertions.assertEquals("+352661840117", cv.phone());
         Assertions.assertEquals("sisi@qin-diaz.com", cv.email());
-        Assertions.assertEquals("1984-01-17", cv.birthDate());
+        Assertions.assertNotNull(cv.birth());
+        Assertions.assertEquals("1984-01-17", cv.birth().date());
+        Assertions.assertEquals("China", cv.birth().country());
+        Assertions.assertEquals("Kunming", cv.birth().city());
         Assertions.assertEquals("Chinese", cv.nationality());
-        Assertions.assertTrue(cv.jobTitle().isPresent());
-        Assertions.assertEquals("Inside Sales Specialist", cv.jobTitle().get());
-        Assertions.assertTrue(cv.linkedIn().isPresent());
-        Assertions.assertEquals("https://www.linkedin.com/in/qinsisi/?locale=en-US", cv.linkedIn().get());
+        Assertions.assertEquals("Inside Sales Specialist", cv.jobTitle());
+        Assertions.assertEquals("https://www.linkedin.com/in/qinsisi/?locale=en-US", cv.linkedIn());
         Assertions.assertNotNull(cv.address());
         Assertions.assertEquals("Luxembourg", cv.address().country());
         Assertions.assertEquals("Luxembourg", cv.address().city());
@@ -40,10 +41,8 @@ class CVLoaderTest {
         Assertions.assertEquals("Master Human Resources Management", hr.diploma().name());
         Assertions.assertEquals("Human Resources Management", hr.diploma().field());
         Assertions.assertEquals(2009, hr.diploma().year());
-        Assertions.assertTrue(hr.diploma().degree().isPresent());
-        Assertions.assertEquals("Master 2", hr.diploma().degree().get());
-        Assertions.assertTrue(hr.diploma().europeanLevel().isPresent());
-        Assertions.assertEquals(7, hr.diploma().europeanLevel().get());
+        Assertions.assertEquals("Master 2", hr.diploma().degree());
+        Assertions.assertEquals(7, hr.diploma().europeanLevel());
         Assertions.assertEquals("IAE Brest - Écoles Universitaires de Management", hr.school().name());
         Assertions.assertNotNull(hr.school().location());
 
@@ -57,12 +56,12 @@ class CVLoaderTest {
         Assertions.assertEquals("Mamer", ceratizitCSA.company().location().city());
         Assertions.assertEquals(2021, ceratizitCSA.dates().startTime().year());
         Assertions.assertEquals(3, ceratizitCSA.dates().startTime().month());
-        Assertions.assertEquals(2025, ceratizitCSA.dates().endTime().get().year());
-        Assertions.assertEquals(2, ceratizitCSA.dates().endTime().get().month());
-        Assertions.assertEquals("on-site", ceratizitCSA.workingType().get());
-        Assertions.assertEquals("full-time", ceratizitCSA.workingTime().get());
-        Assertions.assertEquals("employee", ceratizitCSA.jobType().get());
-        Assertions.assertEquals("Asia-Pacific Area (APAC)", ceratizitCSA.jobSubTitle().get());
+        Assertions.assertEquals(2025, ceratizitCSA.dates().endTime().year());
+        Assertions.assertEquals(2, ceratizitCSA.dates().endTime().month());
+        Assertions.assertEquals("on-site", ceratizitCSA.workingType());
+        Assertions.assertEquals("full-time", ceratizitCSA.workingTime());
+        Assertions.assertEquals("employee", ceratizitCSA.jobType());
+        Assertions.assertEquals("Asia-Pacific Area (APAC)", ceratizitCSA.jobSubTitle());
         Assertions.assertNotNull(ceratizitCSA.tasks());
         Assertions.assertFalse(ceratizitCSA.tasks().trim().isBlank());
     }

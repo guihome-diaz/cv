@@ -1,8 +1,13 @@
 lastName: QIN
 firstName: Sisi
-phone: +352661831105
+gender: Female
+phone: +352661840117
+phoneDisplay: (+352) 661 84 01 17
 email: sisi@qin-diaz.com
-birthDate: 1984-01-17
+birth:
+  date: 1984-01-17
+  country: China
+  city: Kunming
 nationality: Chinese
 jobTitle: Inside Sales Specialist
 linkedIn: https://www.linkedin.com/in/qinsisi/?locale=en-US

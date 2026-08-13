@@ -2,6 +2,7 @@ package eu.daxiongmao.prv.cv.dto;
 
 import eu.daxiongmao.prv.cv.dto.education.Education;
 import eu.daxiongmao.prv.cv.dto.experience.Experience;
+import eu.daxiongmao.prv.cv.dto.global.Birth;
 import eu.daxiongmao.prv.cv.dto.lang.Language;
 
 import java.util.List;
@@ -10,12 +11,14 @@ import java.util.Optional;
 public record CV(
         String lastName,
         String firstName,
+        String gender,
         String phone,
+        String phoneDisplay,
         String email,
-        String birthDate,
+        Birth birth,
         String nationality,
-        Optional<String> jobTitle,
-        Optional<String> linkedIn,
+        String jobTitle,
+        String linkedIn,
         Address address,
         List<Education> education,
         List<Language> languages,

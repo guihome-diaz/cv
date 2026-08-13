@@ -5,6 +5,6 @@ import java.util.Optional;
 
 public record DateRange(
         YearMonth startTime,
-        Optional<YearMonth> endTime
+        YearMonth endTime
 ) {
 }

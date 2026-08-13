@@ -7,9 +7,9 @@ public record Experience(
         String jobTitle,
         String tasks,
         DateRange dates,
-        Optional<String> jobSubTitle,
-        Optional<String> workingType,
-        Optional<String> workingTime,
-        Optional<String> jobType
+        String jobSubTitle,
+        String workingType,
+        String workingTime,
+        String jobType
 ) {
 }
