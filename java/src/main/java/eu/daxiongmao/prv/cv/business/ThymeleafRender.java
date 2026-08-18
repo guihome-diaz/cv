@@ -1,10 +1,8 @@
 package eu.daxiongmao.prv.cv.business;
 
-import com.aayushatharva.brotli4j.common.annotations.Local;
-import eu.daxiongmao.prv.cv.dto.CV;
+import eu.daxiongmao.prv.cv.CVAdvanced;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.messageresolver.StandardMessageResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
@@ -15,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -58,7 +55,7 @@ public class ThymeleafRender {
      * @param currentLocale current language
      * @return complete HTML document as String
      */
-    public String htmlRendering(CV cv, String templateFileName, Locale currentLocale) {
+    public String htmlRendering(CVAdvanced cv, String templateFileName, Locale currentLocale) {
         Context context = new Context(currentLocale);
 
         // Computed variables for template convenience
@@ -76,7 +73,7 @@ public class ThymeleafRender {
     /**
      * Render with inline CSS for PDF generation.
      */
-    public String renderForPDF(CV cv, String cssContent, String templateFileName, Locale currentLocale) {
+    public String renderForPDF(CVAdvanced cv, String cssContent, String templateFileName, Locale currentLocale) {
         String html = htmlRendering(cv, templateFileName, currentLocale);
 
         // Inline CSS into <head> for PDF self-containment

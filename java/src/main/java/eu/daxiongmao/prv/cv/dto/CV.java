@@ -6,7 +6,6 @@ import eu.daxiongmao.prv.cv.dto.global.Birth;
 import eu.daxiongmao.prv.cv.dto.lang.Language;
 
 import java.util.List;
-import java.util.Optional;
 
 public record CV(
         String lastName,
@@ -18,6 +17,7 @@ public record CV(
         Birth birth,
         String nationality,
         String jobTitle,
+        String personalStatement,
         String linkedIn,
         Address address,
         List<Education> education,

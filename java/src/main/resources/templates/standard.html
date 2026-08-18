@@ -44,58 +44,70 @@
         <!-- ====== EXPERIENCE ====== -->
         <section class="cv-section">
             <h2 class="cv-section-title" th:text="#{section.header.experience}">Experience</h2>
+
             <div class="experience-item" th:each="exp : ${cv.experiences}">
-                <!-- Mission title - Company   ...  Dates -->
                 <div class="experience-header">
+                    <!-- Mission title - Subtitle -->
                     <div class="experience-main">
-                        <span class="job-title" th:text="${exp.jobTitle}">JobTitle</span>
-                        <span class="company-separator"> — </span>
+                        <h3 th:text="${exp.jobTitle}">JobTitle</h3>
+                        <span th:if="${exp.jobSubtitle != null}">&nbsp;—&nbsp;</span>
+                        <span class="job-subtitle" th:if="${exp.jobSubtitle != null}" th:text="${exp.jobSubtitle}"></span>
+                    </div>
+                    <!-- Company name and location -->
+                    <div>
                         <span class="company-name" th:text="${exp.company.name}">CompanyName</span>
+                        <span> — </span>
+                        <span class="company-location" th:text="${exp.company.location.city} + ', ' + ${exp.company.location.country}">city, country</span>
                     </div>
+                    <!-- Company ... Dates -->
                     <div class="experience-dates">
-                        <span th:text="|${#numbers.formatInteger(exp.dates.startTime.month, 2)}/${exp.dates.startTime.year}|">StartTime</span> – <span th:text="${exp.dates.endTime != null} ? ${#numbers.formatInteger(exp.dates.endTime.month, 2)}/${exp.dates.endTime.year} : #{experience.date.present}">EndTime</span>
+                        <span th:if="${exp.dates.endTime == null}" th:text="|#{experience.date.since} |">...since...</span>
+                        <time th:datetime="${#temporals.format(exp.dates.startTime.date, 'yyyy-MM-dd')}" th:text="${#temporals.format(exp.dates.startTime.date, 'MMM yyyy')}">Jan 1970</time>
+                        <span th:if="${exp.dates.endTime != null}">&nbsp;–&nbsp;</span>
+                        <time th:if="${exp.dates.endTime != null}" th:datetime="${#temporals.format(exp.dates.endTime.date, 'yyyy-MM-dd')}" th:text="${#temporals.format(exp.dates.endTime.date, 'MMM yyyy')}">Dec 1970</time>
                     </div>
                 </div>
-                <!-- Mission subtitle -->
-                <div class="experience-subheader" th:if="${exp.jobSubtitle != null}" th:text="${exp.jobSubtitle}"></div>
-                <!-- Mission location -->
-                <div class="company-location">
-                    <span th:text="${exp.company.location.city} + ', ' + ${exp.company.location.country}">city, country</span>
-                </div>
+                <!-- Tasks -->
                 <div class="task-list">
-                    <span th:text="${exp.tasks}">Tasks</span>
+                    <!-- <span th:text="${exp.tasks}">Tasks</span> -->
+                    <th:block th:each="task : ${exp.tasks}">
+                        <!-- Task title -->
+                        <span th:if="${!task.text.isBlank}" th:text="${task.text}">Task text</span>
+                        <!-- Sub-items -->
+                        <ul class="tasks" th:if="${!task.subItems.isEmpty}">
+                            <li th:each="sub : ${task.subItems}" th:text="${sub}">Sub-item</li>
+                        </ul>
+                    </th:block>
                 </div>
             </div>
         </section>
 
         <!-- ====== EDUCATION ====== -->
         <section class="cv-section">
-            <h2 class="cv-section-title">Formation</h2>
+            <h2 class="cv-section-title" th:text="#{section.header.education}">Education</h2>
 
             <!-- Use pre-sorted list from context -->
             <div th:each="edu, iterStat : ${cv.education}" class="cv-education-item">
-                <div class="edu-title" th:text="${edu.diploma.name}">Diploma</div>
-                <div class="edu-eqf" th:if="${edu.diploma.europeanLevel}" th:text="#{education.eqf} + ${edu.diploma.europeanLevel()}">Diploma</div>
+                <h3 th:text="${edu.diploma.name}">Diploma</h3>
+                <span class="edu-eqf" th:if="${edu.diploma.europeanLevel != null}" th:text="|#{education.eqf} (${edu.diploma.europeanLevel()})|">EQF level</span>
                 <div class="edu-time">
                     <span th:text="${edu.diploma.year}">eduTime</span> - <span th:text="${edu.school.location.city} + ', ' + ${edu.school.location.country}"></span>
                 </div>
-                <div class="cv-margin-line"></div>
             </div>
         </section>
 
-        <!-- LANGUES -->
+        <!-- ====== LANGUAGES ====== -->
         <section class="cv-section">
-            <h2 class="cv-section-title">Langues</h2>
+            <h2 class="cv-section-title" th:text="#{section.header.languages}">Languages</h2>
 
-            <table class="lang-table">
-                <tr th:each="lang : ${cv.languages}">
-                    <td th:text="${lang.language}">Langue</td>
-                    <td th:text="${lang.motherTongue} ? 'Langue maternelle' : |Niveau ${lang.level}|">Niveau</td>
-                    <td th:text="${lang.description}">Description</td>
-                </tr>
-            </table>
+            <div class="lang-list">
+                <div th:each="lang : ${cv.languages}" class="lang-item">
+                    <div class="lang-name" th:text="${lang.language}">Langue</div>
+                    <div class="lang-level" th:text="${lang.level}">Niveau</div>
+                    <div class="lang-desc" th:text="${lang.motherTongue} ? #{language.level.native} : ${lang.description}">Description</div>
+                </div>
+            </div>
         </section>
-
     </main>
 
 </body>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <!-- Template based on https://github.com/paul-hammant/better-cv-tech/
+         and adapted manually for current use-case and techno (Java / Thymeleaf - no spring!) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|${cv.firstName} ${cv.lastName}|">Curriculum Vitae</title>
+    <!-- External CSS (website) -->
+    <link rel="stylesheet" href="../static/css/better-cv-tech.css" th:href="@{css/better-cv-tech.css}" media="all">
+    <!-- Inlined CSS -->
+    <!-- This is required for the current application because we just generate HTML (no server) -->
+    <style th:utext="${cssContent}"></style>
+</head>
+<body>
+    <div id="app">
+        <!-- ============ HEADER ============ -->
+        <header class="cv-header">
+            <h1 id="name" th:text="|${cv.firstName} ${cv.lastName}|" aria-label="Name">MyName</h1>
+            <div class="contact-details">
+                <span id="address" th:text="${cv.address.city + ', ' + cv.address.country}">Address</span>
+                <span id="phone"><a th:href="|tel:${cv.phone}|" th:text="${cv.phoneDisplay}" th:title="${cv.phoneDisplay}" aria-label="Phone">Phone</a></span>
+                <span id="email"><a th:href="|mailto:${cv.email}|" th:text="${cv.email}" th:title="${cv.email}" aria-label="Email">Email</a></span>
+                <span id="linkedIn"><a th:href="${cv.linkedIn}" th:text="LinkedIn" th:title="LinkedIn" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">_LinkedIn_</a></span>
+            </div>
+        </header>
+    </div>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main>
+
+        <!-- ====== PERSONAL STATEMENT ====== -->
+        <section class="statement">
+            <div th:if="${cv.personalStatement != null}" id="personal-statement" th:text="${cv.personalStatement}"></div>
+        </section>
+
+        <!-- ====== SKILLS ====== -->
+        <section class="skills-section" id="skills-container">
+            <h2 th:text="#{section.header.skills}">_Skills_</h2>
+            <div class="skills-grid">
+                <!-- TODO forEach -->
+                <!-- TODO #1 -->
+                <div class="skill-category">
+                    <!-- Skill category title -->
+                    <h3 class="skill-category-title">Logistic <span class="skill-level"> (expert)</span></h3>
+                    <!-- List of skills -->
+                    <div class="skills-list">quote-to-cash • tracking • reclamations</div>
+                </div>
+                <!-- TODO #2 -->
+                <div class="skill-category">
+                    <!-- Skill category title -->
+                    <h3 class="skill-category-title">Human Resources <span class="skill-level"> (intermediate)</span></h3>
+                    <!-- List of skills -->
+                    <div class="skills-list">Labour law • skills management • Training plan</div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <div class="two-column">
+            <!-- ====== EDUCATION ====== -->
+            <aside class="education-section">
+                <h2 th:text="#{section.header.education}">Education</h2>
+                <div id="education-list">
+                    <div th:each="edu, iterStat : ${cv.education}" class="education-item" data-section="education">
+                        <div class="qual-content">
+                            <span th:text="${edu.diploma.name}">Diploma</span>
+                            <span class="edu-eqf" th:if="${edu.diploma.europeanLevel != null}" th:text="| - #{education.eqf} (${edu.diploma.europeanLevel()})|">EQF level</span>
+                        </div>
+                        <div class="qual-establishment" th:text="|${edu.diploma.year} - ${edu.school.location.city}, ${edu.school.location.country}|">Year - city, country</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ====== EXPERIENCE ====== -->
+            <section class="employment-section">
+                <h2 th:text="#{section.header.experience}">Work Experience</h2>
+                <div id="employment-list">
+                    <div class="employment-item single-position" th:each="exp : ${cv.experiences}" data-section="work">
+                        <h3 class="single-position-title">
+                            <!-- Job title and subTitle -->
+                            <span class="position-name" th:text="${exp.jobTitle}">JobTitle</span>
+                            <span class="position-name" th:if="${exp.jobSubtitle != null}" th:text="| - ${exp.jobSubtitle}|"></span><br>
+                            <!-- Company -->
+                            at <a th:href="${exp.company.linkedIn != null} ? ${exp.company.linkedIn} : '#'" th:text="${exp.company.name}" target="_blank" rel="noopener noreferrer" class="company-name">Company name</a>
+                            <!-- Dates -->
+                            <span class="job-dates">
+                                (
+                                    <span th:if="${exp.dates.endTime == null}" th:text="|#{experience.date.since} |">...since...</span>
+                                    <time th:datetime="${#temporals.format(exp.dates.startTime.date, 'yyyy-MM-dd')}" th:text="${#temporals.format(exp.dates.startTime.date, 'MMM yyyy')}">Jan 1970</time>
+                                    <span th:if="${exp.dates.endTime != null}">&nbsp;–&nbsp;</span>
+                                    <time th:if="${exp.dates.endTime != null}" th:datetime="${#temporals.format(exp.dates.endTime.date, 'yyyy-MM-dd')}" th:text="${#temporals.format(exp.dates.endTime.date, 'MMM yyyy')}">Dec 1970</time>
+                                )
+                            </span>
+                        </h3>
+                        <!-- Tasks -->
+                        <th:block th:each="task : ${exp.tasks}">
+                            <!-- Task title -->
+                            <div th:if="${!task.text.isBlank}" class="job-description" th:text="${task.text}">Task text</div>
+                            <!-- Sub-items -->
+                            <ul class="achievements" th:if="${!task.subItems.isEmpty}">
+                                <li th:each="sub : ${task.subItems}" th:text="${sub}">Sub-item</li>
+                            </ul>
+                        </th:block>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ====== LANGUAGES ====== -->
+        <section class="languages-section">
+            <h2 th:text="#{section.header.languages}">Languages</h2>
+            <div id="languages-list">
+                <ul class="languages-list" th:each="lang : ${cv.languages}">
+                    <li>
+                        <strong th:text="${lang.language}">Language name</strong>:
+                        <span th:text="${lang.level}">Language level</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- ====== INTERESTS ====== -->
+        <section class="interests-section">
+            <h2 th:text="#{section.header.interests}">Interests</h2>
+            <div id="interests-list">
+                <!-- TODO forEach -->
+                <div class="interest-item" data-section="interests">
+                    <h3>Travel</h3>
+                    <div class="interest-keywords">Discovery • History • Culture • City</div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

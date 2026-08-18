@@ -10,6 +10,8 @@ birth:
   city: Kunming
 nationality: Chinese
 jobTitle: Inside Sales Specialist
+personalStatement: |
+  Inside sales specialist with deep APAC market expertise, strong customer relationship, inter-company coordination, and quote-to-cash operations.
 linkedIn: https://www.linkedin.com/in/qinsisi/?locale=en-US
 address:
   country: Luxembourg
@@ -99,9 +101,11 @@ experiences:
       startTime:
         year: 2006
         month: 2
+        day: 1
       endTime:
         year: 2006
         month: 3
+        day: 31
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -122,9 +126,11 @@ experiences:
       startTime:
         year: 2008
         month: 4
+        day: 1
       endTime:
         year: 2008
         month: 9
+        day: 30
     workingType: on-site
     workingTime: full-time
     jobType: internship
@@ -148,9 +154,11 @@ experiences:
       startTime:
         year: 2009
         month: 4
+        day: 1
       endTime:
         year: 2009
         month: 9
+        day: 30
     workingType: on-site
     workingTime: full-time
     jobType: internship
@@ -173,9 +181,11 @@ experiences:
       startTime:
         year: 2010
         month: 7
+        day: 1
       endTime:
         year: 2010
         month: 10
+        day: 31
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -196,9 +206,11 @@ experiences:
       startTime:
         year: 2011
         month: 1
+        day: 1
       endTime:
         year: 2012
         month: 5
+        day: 31
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -220,9 +232,11 @@ experiences:
       startTime:
         year: 2012
         month: 6
+        day: 1
       endTime:
         year: 2012
         month: 7
+        day: 31
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -241,9 +255,11 @@ experiences:
       startTime:
         year: 2012
         month: 8
+        day: 1
       endTime:
         year: 2012
         month: 10
+        day: 31
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -264,9 +280,11 @@ experiences:
       startTime:
         year: 2014
         month: 6
+        day: 1
       endTime:
         year: 2014
         month: 9
+        day: 30
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -286,9 +304,11 @@ experiences:
       startTime:
         year: 2015
         month: 8
+        day: 1
       endTime:
         year: 2015
         month: 12
+        day: 31
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -315,9 +335,11 @@ experiences:
       startTime:
         year: 2017
         month: 12
+        day: 1
       endTime:
         year: 2019
         month: 2
+        day: 28
     workingType: on-site
     workingTime: part-time
     jobType: employee
@@ -347,9 +369,11 @@ experiences:
       startTime:
         year: 2019
         month: 3
+        day: 1
       endTime:
         year: 2020
         month: 7
+        day: 31
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -374,9 +398,11 @@ experiences:
       startTime:
         year: 2020
         month: 8
+        day: 1
       endTime:
         year: 2021
         month: 2
+        day: 28
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -398,9 +424,11 @@ experiences:
       startTime:
         year: 2021
         month: 3
+        day: 1
       endTime:
         year: 2025
         month: 2
+        day: 28
     workingType: on-site
     workingTime: full-time
     jobType: employee
@@ -427,6 +455,7 @@ experiences:
       startTime:
         year: 2025
         month: 3
+        day: 1
     workingType: on-site
     workingTime: full-time
     jobType: employee

@@ -2,10 +2,7 @@ package eu.daxiongmao.prv.cv;
 
 import eu.daxiongmao.prv.cv.business.CVLoader;
 import eu.daxiongmao.prv.cv.business.ThymeleafRender;
-import eu.daxiongmao.prv.cv.dto.CV;
 
-import javax.crypto.spec.PSource;
-import java.io.EOFException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -72,7 +69,7 @@ public class Application {
     public String executeHtmlRendering() {
         // 1. PARSE YAML
         CVLoader parser = new CVLoader();
-        CV personalCV = parser.load(this.data);
+        CVAdvanced personalCV = parser.load(this.data);
         System.out.println("Parsed: " + personalCV.firstName() + " " + personalCV.lastName());
 
         // 2. Render HTML
@@ -83,7 +80,7 @@ public class Application {
         try {
             Path outputDir = Paths.get("target", "html");
             Files.createDirectories(outputDir);
-            Path htmlPath = outputDir.resolve("htmlRendering.html");
+            Path htmlPath = outputDir.resolve("%s-%s.html".formatted(this.template, this.lang.toLanguageTag()));
             Files.writeString(htmlPath, html);
             System.out.println("HTML file: " + htmlPath);
             return htmlPath.toString();

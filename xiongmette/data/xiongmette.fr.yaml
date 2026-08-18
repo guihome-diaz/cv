@@ -10,7 +10,11 @@ birth:
   city: Kunming
 nationality: Chinoise
 jobTitle: Commerciale sédentaire
-linkedIn: https://www.linkedin.com/in/qinsisi/?locale=en-US
+personalStatement: |
+  Commerciale sédentaire spécialiste du marché Asie-Pacifique. 
+  Plusieurs années d'expérience de coordination avec les clients, partenaires et succursales internationales 
+  afin d'assurer le suivi de bout-en-bout des commandes jusqu'à la livraison et la gestion des réclamations.
+linkedIn: https://www.linkedin.com/in/qinsisi/?locale=fr-FR
 address:
   country: Luxembourg
   city: Luxembourg
@@ -148,9 +152,11 @@ experiences:
       startTime:
         year: 2009
         month: 4
+        day: 1
       endTime:
         year: 2009
         month: 9
+        day: 30
     workingType: sur site
     workingTime: temps plein
     jobType: stagiaire
@@ -173,9 +179,11 @@ experiences:
       startTime:
         year: 2010
         month: 7
+        day: 1
       endTime:
         year: 2010
         month: 10
+        day: 31
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -197,9 +205,11 @@ experiences:
       startTime:
         year: 2011
         month: 1
+        day: 1
       endTime:
         year: 2012
         month: 5
+        day: 31
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -222,9 +232,11 @@ experiences:
       startTime:
         year: 2012
         month: 6
+        day: 1
       endTime:
         year: 2012
         month: 7
+        day: 31
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -245,9 +257,11 @@ experiences:
       startTime:
         year: 2012
         month: 8
+        day: 1
       endTime:
         year: 2012
         month: 10
+        day: 31
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -269,9 +283,11 @@ experiences:
       startTime:
         year: 2014
         month: 6
+        day: 1
       endTime:
         year: 2014
         month: 9
+        day: 30
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -292,9 +308,11 @@ experiences:
       startTime:
         year: 2015
         month: 8
+        day: 1
       endTime:
         year: 2015
         month: 12
+        day: 31
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -322,9 +340,11 @@ experiences:
       startTime:
         year: 2017
         month: 12
+        day: 1
       endTime:
         year: 2019
         month: 2
+        day: 28
     workingType: sur site
     workingTime: mi-temps
     jobType: employée
@@ -354,9 +374,11 @@ experiences:
       startTime:
         year: 2019
         month: 3
+        day: 1
       endTime:
         year: 2020
         month: 7
+        day: 31
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -378,9 +400,11 @@ experiences:
       startTime:
         year: 2020
         month: 8
+        day: 1
       endTime:
         year: 2021
         month: 2
+        day: 28
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -402,9 +426,11 @@ experiences:
       startTime:
         year: 2021
         month: 3
+        day: 1
       endTime:
         year: 2025
         month: 2
+        day: 28
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -431,6 +457,7 @@ experiences:
       startTime:
         year: 2025
         month: 3
+        day: 1
     workingType: sur site
     workingTime: temps plein
     jobType: employée

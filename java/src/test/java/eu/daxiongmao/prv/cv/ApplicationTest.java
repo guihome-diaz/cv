@@ -9,12 +9,19 @@ import java.util.Locale;
 class ApplicationTest {
 
     @Test
-    void applicationTest_English() {
+    void standard_english() {
         Path testFile = Paths.get("src", "test", "resources", "2026.xiongmette.en.yaml");
         String template = "standard";
         Application app = new Application(testFile, template, Locale.ENGLISH);
         app.executeHtmlRendering();
     }
 
+    @Test
+    void betterCvTech_english() {
+        Path testFile = Paths.get("src", "test", "resources", "2026.xiongmette.en.yaml");
+        String template = "better-cv-tech";
+        Application app = new Application(testFile, template, Locale.ENGLISH);
+        app.executeHtmlRendering();
+    }
 
 }

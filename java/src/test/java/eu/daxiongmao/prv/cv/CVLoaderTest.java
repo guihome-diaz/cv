@@ -1,10 +1,8 @@
 package eu.daxiongmao.prv.cv;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import eu.daxiongmao.prv.cv.business.CVLoader;
-import eu.daxiongmao.prv.cv.dto.CV;
 import eu.daxiongmao.prv.cv.dto.education.Education;
-import eu.daxiongmao.prv.cv.dto.experience.Experience;
+import eu.daxiongmao.prv.cv.dto.experience.ExperienceWithTasks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +16,7 @@ class CVLoaderTest {
     @Test
     void parseYaml() {
         Path testFile = Paths.get("src", "test", "resources", "2026.xiongmette.en.yaml");
-        CV cv = cvLoader.load(testFile);
+        CVAdvanced cv = cvLoader.load(testFile);
         Assertions.assertNotNull(cv);
         Assertions.assertEquals("QIN", cv.lastName());
         Assertions.assertEquals("Sisi", cv.firstName());
@@ -48,7 +46,7 @@ class CVLoaderTest {
 
         Assertions.assertNotNull(cv.experiences());
         Assertions.assertEquals(14, cv.experiences().size());
-        Experience ceratizitCSA = cv.experiences().stream().filter(experience -> "Sales Administrator".equals(experience.jobTitle())).findAny().get();
+        ExperienceWithTasks ceratizitCSA = cv.experiences().stream().filter(experience -> "Sales Administrator".equals(experience.jobTitle())).findAny().get();
         Assertions.assertEquals("CERATIZIT", ceratizitCSA.company().name());
         Assertions.assertEquals("https://www.linkedin.com/company/ceratizit", ceratizitCSA.company().linkedIn().get());
         Assertions.assertEquals("Metallurgy industry", ceratizitCSA.company().sector().get());
@@ -63,7 +61,7 @@ class CVLoaderTest {
         Assertions.assertEquals("employee", ceratizitCSA.jobType());
         Assertions.assertEquals("Asia-Pacific Area (APAC)", ceratizitCSA.jobSubTitle());
         Assertions.assertNotNull(ceratizitCSA.tasks());
-        Assertions.assertFalse(ceratizitCSA.tasks().trim().isBlank());
+        Assertions.assertFalse(ceratizitCSA.tasks().isEmpty());
     }
 
 }

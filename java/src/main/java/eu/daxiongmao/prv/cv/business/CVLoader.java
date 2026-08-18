@@ -1,13 +1,11 @@
 package eu.daxiongmao.prv.cv.business;
 
+import eu.daxiongmao.prv.cv.CVAdvanced;
 import eu.daxiongmao.prv.cv.dto.CV;
-import eu.daxiongmao.prv.cv.dto.education.Diploma;
 import eu.daxiongmao.prv.cv.dto.education.Education;
-import eu.daxiongmao.prv.cv.dto.experience.Experience;
+import eu.daxiongmao.prv.cv.dto.experience.ExperienceWithTasks;
 import tools.jackson.databind.ObjectMapper;
-import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.dataformat.yaml.YAMLFactory;
-import tools.jackson.dataformat.yaml.YAMLReadFeature;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,21 +20,23 @@ public class CVLoader {
         this.objectMapper = new ObjectMapper(yamlFactory);
     }
 
-    public CV load(Path yamlFile) {
+    public CVAdvanced load(Path yamlFile) {
         if (yamlFile == null || Files.notExists(yamlFile)) {
             throw new IllegalArgumentException("Given YAML file does not exist: " + yamlFile);
         }
         CV personalCV = objectMapper.readValue(yamlFile, CV.class);
+        // Build advanced object (parse tasks and so on)
+        CVAdvanced advancedCV = new CVAdvanced(personalCV);
         // Order experiences and diplomas
-        personalCV.experiences().sort(experienceComparator);
-        personalCV.education().sort(diplomaComparator);
-        return personalCV;
+        advancedCV.experiences().sort(experienceComparator);
+        advancedCV.education().sort(diplomaComparator);
+        return advancedCV;
     }
 
     /**
      * To sort the experiences from the current one (index 0) to the oldest (max index).
      */
-    public Comparator<Experience> experienceComparator = (left, right) -> {
+    public Comparator<ExperienceWithTasks> experienceComparator = (left, right) -> {
         if (left.dates() == null || left.dates().endTime() == null) { return -1; }
         if (right.dates() == null || right.dates().endTime() == null) { return 1; }
         // Both experiences are finished
