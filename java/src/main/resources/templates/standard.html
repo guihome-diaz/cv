@@ -40,6 +40,12 @@
 
     <!-- ============ MAIN CONTENT ============ -->
     <main>
+        <!-- ====== PERSONAL STATEMENT ====== -->
+        <section class="header-statement">
+            <h2 class="cv-section-title" th:text="#{section.header.summary}">_PROFILE_</h2>
+            <span th:text="${cv.personalStatement}">Introduction</span>
+        </section>
+
 
         <!-- ====== EXPERIENCE ====== -->
         <section class="cv-section">

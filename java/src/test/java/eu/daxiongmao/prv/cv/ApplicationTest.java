@@ -17,6 +17,15 @@ class ApplicationTest {
     }
 
     @Test
+    void standard_french() {
+        Path testFile = Paths.get("src", "test", "resources", "2026.xiongmette.fr.yaml");
+        String template = "standard";
+        Application app = new Application(testFile, template, Locale.FRENCH);
+        app.executeHtmlRendering();
+    }
+
+
+    @Test
     void betterCvTech_english() {
         Path testFile = Paths.get("src", "test", "resources", "2026.xiongmette.en.yaml");
         String template = "better-cv-tech";
