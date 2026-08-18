@@ -10,8 +10,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 public class Application {
+
+    public static final List<Locale> SUPPORTED_LOCALES = List.of(Locale.ENGLISH, Locale.FRENCH);
+
+    public static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
 
     /** Personal data to include, in YAML format */
     private Path data;
@@ -19,13 +26,24 @@ public class Application {
     /** Name of the Thymeleaf template to use */
     private String template;
 
+    /** Current language */
+    private Locale lang;
+
     public static void main(String[] args) throws Exception {
+        // Get template and data
         if (args.length < 2) {
             printUsage();
             System.exit(1);
         }
+        // Compute language
+        Optional<String> langArg = getLanguageArg(args);
+        Locale currentLang = DEFAULT_LOCALE;
+        if (langArg.isPresent()) {
+            currentLang = computeLocale(langArg.get());
+        }
+
         // Init app
-        Application app = new Application(args[0], args[1]);
+        Application app = new Application(args[0], args[1], currentLang);
 
         // Execute rendering
         app.executeHtmlRendering();
@@ -34,16 +52,17 @@ public class Application {
         System.exit(0);
     }
 
-    public Application(String sourceFile, String template) {
-        this(Paths.get(sourceFile), template);
+    public Application(String sourceFile, String template, Locale language) {
+        this(Paths.get(sourceFile), template, language);
     }
 
-    public Application(Path data, String template) {
+    public Application(Path data, String template, Locale language) {
         if (data == null || Files.notExists(data)) {
             throw new IllegalArgumentException("Missing source data, it must be a YAML file. Invalid source file: " + data);
         }
         this.data = data;
         this.template = template;
+        this.lang = language;
     }
 
     /**
@@ -58,7 +77,7 @@ public class Application {
 
         // 2. Render HTML
         ThymeleafRender render = new ThymeleafRender();
-        String html = render.htmlRendering(personalCV, this.template);
+        String html = render.htmlRendering(personalCV, this.template, this.lang);
 
         // Debug: save HTML
         try {
@@ -73,19 +92,65 @@ public class Application {
         }
     }
 
+    private static Optional<String> getLanguageArg(String[] args) {
+        Optional<String> language = Optional.empty();
+        for (int i = 2; i < args.length; i++) {
+            String arg = args[i];
+            if (arg.equals("--lang") || arg.equals("-l")) {
+                if (i + 1 < args.length) {
+                    language = Optional.of(args[i + 1]);
+                    break;
+                } else {
+                    System.err.println("Error: " + arg + " requires a value");
+                    printUsage();
+                    System.exit(1);
+                }
+            } else if (arg.startsWith("--lang=")) {
+                language = Optional.of(arg.substring("--lang=".length()));
+            } else if (arg.startsWith("-l")) {
+                // Handle -lfr or -l fr
+                if (arg.length() > 2) {
+                    language = Optional.of(arg.substring(2));
+                } else if (i + 1 < args.length) {
+                    language = Optional.of(args[i + 1]);
+                    i++;
+                }
+            }
+        }
+        return language;
+    }
+
+    private static Locale computeLocale(String language) {
+        try {
+            Locale requestedLocale = Locale.of(language);
+            if (!SUPPORTED_LOCALES.contains(requestedLocale)) {
+                System.err.println("Requested language does not belong to the list of supported language: " + SUPPORTED_LOCALES);
+                System.err.println("Use default language instead: " + DEFAULT_LOCALE);
+                return DEFAULT_LOCALE;
+            }
+            return requestedLocale;
+        } catch (Exception e) {
+            System.err.println("Request language '" + language + "' is not a valid java Locale");
+            printUsage();
+            System.exit(2);
+            // Unreachable code, only here for compilation purposes
+            return DEFAULT_LOCALE;
+        }
+    }
+
     private static void printUsage() {
-        System.out.println("""
-            CV Generator - Usage:
-              java -jar cv-generator.jar <cv.yaml> <templateName> [options]
-            
-            Options:
-              --lang, -l <code>   Output language (fr, en, de, es, ...)
-                                  Auto-detected from CV nationality if not specified
-            
-            Examples:
-              java -jar cv-generator.jar cv_sisi_qin.yaml standard-template
-              java -jar cv-generator.jar cv.yaml standard-template --lang=en
-              java -jar cv-generator.jar cv.yaml standard-template -l de
-            """);
+        System.out.printf("""
+                CV Generator - Usage:
+                  java -jar cv-generator.jar <cv.yaml> <templateName> [options]
+                
+                Options:
+                  --lang, -l <code> Output language (fr, en, ..)
+                     supported languages are: %s
+                
+                Examples:
+                  java -jar cv-generator.jar cv_sisi_qin.yaml standard-template
+                  java -jar cv-generator.jar cv.yaml standard-template --lang=en
+                  java -jar cv-generator.jar cv.yaml standard-template -l de
+                %n""", SUPPORTED_LOCALES);
     }
 }

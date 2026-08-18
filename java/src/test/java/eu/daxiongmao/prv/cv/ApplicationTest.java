@@ -4,14 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
 
 class ApplicationTest {
 
     @Test
-    void applicationTest() {
+    void applicationTest_English() {
         Path testFile = Paths.get("src", "test", "resources", "2026.xiongmette.en.yaml");
         String template = "standard";
-        Application app = new Application(testFile, template);
+        Application app = new Application(testFile, template, Locale.ENGLISH);
         app.executeHtmlRendering();
     }
 

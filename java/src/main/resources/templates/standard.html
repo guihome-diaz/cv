@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${cv.firstName} + ' ' + ${cv.lastName}">Curriculum Vitae</title>
-    <link rel="stylesheet" th:href="@{../static/css/standard.css}" href="../static/css/standard.css" media="all">
+    <title th:text="|${cv.firstName} ${cv.lastName}|">Curriculum Vitae</title>
+    <!-- External CSS (website) -->
+    <link rel="stylesheet" href="../static/css/standard.css" th:href="@{css/standard.css}" media="all">
+    <!-- Inlined CSS -->
+    <!-- This is required for the current application because we just generate HTML (no server) -->
+    <style th:utext="${cssContent}"></style>
+
 </head>
 <body>
 
     <!-- ============ HEADER ============ -->
     <header class="cv-header" aria-label="Personal data">
-        <h1 class="header-name" th:text="${cv.firstName} + ' ' + ${cv.lastName}" id="name" aria-label="Name">FirstName LastName</h1>
+        <h1 class="header-name" th:text="|${cv.firstName} ${cv.lastName}|" id="name" aria-label="Name">FirstName LastName</h1>
         <p><span th:text="${cv.jobTitle}" aria-label="Job title" id="jobTitle">jobTitle</span></p>
         <div class="header-contact">
             <!-- Contacts -->
@@ -43,10 +48,12 @@
                 <!-- Mission title - Company   ...  Dates -->
                 <div class="experience-header">
                     <div class="experience-main">
-                        <span class="job-title" th:text="${exp.jobTitle} + ' - ' + ${exp.company.name}">JobTitle and CompanyName</span>
+                        <span class="job-title" th:text="${exp.jobTitle}">JobTitle</span>
+                        <span class="company-separator"> — </span>
+                        <span class="company-name" th:text="${exp.company.name}">CompanyName</span>
                     </div>
                     <div class="experience-dates">
-                        <span th:text="${exp.dates.startTime}">StartTime</span> / <span th:text="${exp.dates.endTime != null} ? ${exp.dates.endTime} : #{experience.date.present}">EndTime</span>
+                        <span th:text="|${#numbers.formatInteger(exp.dates.startTime.month, 2)}/${exp.dates.startTime.year}|">StartTime</span> – <span th:text="${exp.dates.endTime != null} ? ${#numbers.formatInteger(exp.dates.endTime.month, 2)}/${exp.dates.endTime.year} : #{experience.date.present}">EndTime</span>
                     </div>
                 </div>
                 <!-- Mission subtitle -->
