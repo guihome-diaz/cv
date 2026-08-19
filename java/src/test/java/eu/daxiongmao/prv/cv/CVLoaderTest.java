@@ -48,8 +48,8 @@ class CVLoaderTest {
         Assertions.assertEquals(14, cv.experiences().size());
         ExperienceWithTasks ceratizitCSA = cv.experiences().stream().filter(experience -> "Sales Administrator".equals(experience.jobTitle())).findAny().get();
         Assertions.assertEquals("CERATIZIT", ceratizitCSA.company().name());
-        Assertions.assertEquals("https://www.linkedin.com/company/ceratizit", ceratizitCSA.company().linkedIn().get());
-        Assertions.assertEquals("Metallurgy industry", ceratizitCSA.company().sector().get());
+        Assertions.assertEquals("https://www.linkedin.com/company/ceratizit", ceratizitCSA.company().linkedIn());
+        Assertions.assertEquals("Metallurgy industry", ceratizitCSA.company().sector());
         Assertions.assertEquals("Luxembourg", ceratizitCSA.company().location().country());
         Assertions.assertEquals("Mamer", ceratizitCSA.company().location().city());
         Assertions.assertEquals(2021, ceratizitCSA.dates().startTime().year());

@@ -14,7 +14,7 @@
 <body>
 
     <!-- ============ HEADER ============ -->
-    <header class="cv-header" aria-label="Personal data">
+    <header class="cv-header" aria-label="Personal data" data-section="personal-data">
         <h1 class="header-name" th:text="|${cv.firstName} ${cv.lastName}|" id="name" aria-label="Name">FirstName LastName</h1>
         <p><span th:text="${cv.jobTitle}" aria-label="Job title" id="jobTitle">jobTitle</span></p>
         <div class="header-contact">
@@ -51,7 +51,7 @@
         <section class="cv-section">
             <h2 class="cv-section-title" th:text="#{section.header.experience}">Experience</h2>
 
-            <div class="experience-item" th:each="exp : ${cv.experiences}">
+            <div class="experience-item" th:each="exp : ${cv.experiences}" data-section="work">
                 <div class="experience-header">
                     <!-- Mission title - Subtitle -->
                     <div class="experience-main">
@@ -93,7 +93,7 @@
             <h2 class="cv-section-title" th:text="#{section.header.education}">Education</h2>
 
             <!-- Use pre-sorted list from context -->
-            <div th:each="edu, iterStat : ${cv.education}" class="cv-education-item">
+            <div th:each="edu, iterStat : ${cv.education}" class="cv-education-item" data-section="education">
                 <h3 th:text="${edu.diploma.name}">Diploma</h3>
                 <span class="edu-eqf" th:if="${edu.diploma.europeanLevel != null}" th:text="|#{education.eqf} (${edu.diploma.europeanLevel()})|">EQF level</span>
                 <div class="edu-time">
@@ -107,7 +107,7 @@
             <h2 class="cv-section-title" th:text="#{section.header.languages}">Languages</h2>
 
             <div class="lang-list">
-                <div th:each="lang : ${cv.languages}" class="lang-item">
+                <div th:each="lang : ${cv.languages}" class="lang-item" data-section="languages">
                     <div class="lang-name" th:text="${lang.language}">Langue</div>
                     <div class="lang-level" th:text="${lang.level}">Niveau</div>
                     <div class="lang-desc" th:text="${lang.motherTongue} ? #{language.level.native} : ${lang.description}">Description</div>

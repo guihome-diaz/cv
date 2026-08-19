@@ -103,9 +103,11 @@ experiences:
       startTime:
         year: 2006
         month: 2
+        day: 1
       endTime:
         year: 2006
         month: 3
+        day: 31
     workingType: sur site
     workingTime: temps plein
     jobType: employée
@@ -126,9 +128,11 @@ experiences:
       startTime:
         year: 2008
         month: 4
+        day: 1
       endTime:
         year: 2008
         month: 9
+        day: 30
     workingType: sur site
     workingTime: temps plein
     jobType: stagiaire
@@ -162,7 +166,7 @@ experiences:
     jobType: stagiaire
     jobTitle: Assistante Ressources Humaines
     jobSubTitle: Master 2 Ressources Humaines — Projet de fin d’études
-    tasks: |  
+    tasks: |
       - Élaboration d'une stratégie de GPEC et de planification des effectifs
       - Conception et réalisation de synthèses illustrées sur le code du travail et la convention collective agricole
       - Formation des dirigeants agricoles aux nouveaux processus RH
